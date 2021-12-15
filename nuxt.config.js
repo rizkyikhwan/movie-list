@@ -94,7 +94,8 @@ export default {
     axios: {
       baseURL: process.env.API_URL,
     },
-    backdropImg: process.env.BACKDROP_IMG
+    img: process.env.IMG,
+    poster: process.env.POSTER
   },
   
   privateRuntimeConfig: {

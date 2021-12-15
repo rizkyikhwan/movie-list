@@ -1,32 +1,22 @@
 <template>
-  <div class="container">
-    <h1 class="h2">Upcoming</h1>
+  <section class="now-playing">
+    <h1 class="title">Now Playing in Theaters</h1>
     <swiper :options="swiperOption" class="swiper">
-      <swiper-slide v-for="upcoming in upcomings" :key="upcoming.id">
-        <CardUpcoming :upcoming="upcoming" />
+      <swiper-slide v-for="now_playing in now_playings" :key="now_playing.id">
+        <CardNowPlaying :now_playing="now_playing" />
       </swiper-slide>
       <div class="swiper-pagination" slot="pagination"></div>
     </swiper>
-  </div>
+  </section>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      upcomings: [],
+      now_playings: [],
       swiperOption: {
         spaceBetween: 10,
-        breakpoints: {
-          576: {
-            slidesPerView: 1,
-            spaceBetween: 8,
-          },
-          767: {
-            slidesPerView: 3,
-            spaceBetween: 8,
-          },
-        },
         autoplay: {
           delay: 3500,
           disableOnInteraction: false,
@@ -39,20 +29,24 @@ export default {
     }
   },
   async fetch() {
-    await this.getUpcoming()
+    await this.getNowPlaying()
   },
   methods: {
-    async getUpcoming() {
+    async getNowPlaying() {
       const data = await this.$axios.$get(
-        `/movie/upcoming?api_key=${process.env.apiKey}&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate`
+        `/movie/now_playing?api_key=${process.env.apiKey}&language=en-US&page=1`
       )
-      this.upcomings = data.results.slice(0, 10)
+      this.now_playings = data.results.slice(0, 10)
     },
   },
 }
 </script>
 
 <style lang="scss" scoped>
+.title {
+  font-size: 2rem;
+}
+
 .link {
   color: $color-primary;
   font-size: 16px;
@@ -67,5 +61,11 @@ export default {
 .swiper-pagination-custom,
 .swiper-pagination-fraction {
   bottom: 0;
+}
+
+@media (max-width: $sm) {
+  .title {
+    font-size: 1.25rem;
+  }
 }
 </style>

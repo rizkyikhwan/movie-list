@@ -1,32 +1,32 @@
 <template>
-  <div class="wrapper">
+  <div class="card-now-playing">
     <img
-      :src="`${$config.backdropImg}/${upcoming.backdrop_path}`"
-      :alt="upcoming.title"
+      :src="`${$config.img}/${now_playing.backdrop_path}`"
+      :alt="now_playing.title"
       class="img-fluid banner"
     />
     <div class="info d-flex flex-column align-items-start">
-      <p class="title font-weight-bolder mb-0">
-        {{ upcoming.title.slice(0, 25) }}
-        <span v-if="upcoming.title.length > 25">...</span>
-      </p>
+      <h6 class="title font-weight-bold mb-1">
+        {{ now_playing.title.slice(0, 25) }}
+        <span v-if="now_playing.title.length > 25">...</span>
+      </h6>
       <small class="font-weight-light mb-2">
         {{
-          getRealease(upcoming.release_date)
+          getRelease(now_playing.release_date)
         }}
       </small>
     </div>
     <small class="rating shadow">
-      <fa icon="star" /> {{ upcoming.vote_average }}
+      <fa icon="star" class="star" /> {{ now_playing.vote_average }}
     </small>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['upcoming'],
+  props: ['now_playing'],
   methods: {
-    getRealease(value) {
+    getRelease(value) {
       return new Date(value).toLocaleString('en-US', {
         month: 'long',
         day: 'numeric',
@@ -38,10 +38,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.wrapper {
+.card-now-playing {
   position: relative;
   text-align: center;
-  color: white;
+  color: $text-light;
 
   &::before {
     content: "";
@@ -50,12 +50,16 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    border-radius: 0 0 $rounded $rounded ;
-    background-image: linear-gradient(transparent, black);
+    border-radius: $rounded ;
+    background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
   }
 
   .banner {
     border-radius: $rounded;
+  }
+
+  .title {
+    letter-spacing: 1.25px;
   }
 
   .info {
@@ -70,8 +74,12 @@ export default {
     right: 0;
     padding: 3px 6px;
     border-radius: 0 $rounded 0 $rounded;
-    background: $color-secondary;
-    filter: drop-shadow(0 0 1px $color-secondary);
+    background: #414850;
+    filter: drop-shadow(0 0 1px #414850);
   }
+}
+
+.star {
+  color: #fcda5f;
 }
 </style>

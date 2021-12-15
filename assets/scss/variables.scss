@@ -4,6 +4,7 @@
   --bg: #f3f5f8;
   --bg-navbar: #f8f9fa;
   --bg-btn-mode: #fcda5f;
+  --bg-card: #eceef1;
   --form-serach: #fff;
   --border-form: #ced4da;
   --button-primary: #3e55e9;
@@ -33,6 +34,7 @@
   --bg: #2b2e33;
   --bg-navbar: #272b30;
   --bg-btn-mode: var(--navy-blue);
+  --bg-card: #32383e;
   --form-serach: #1c1d1f;
   --border-form: #2c2e30;
   --button-primary: #263bc4;
@@ -62,10 +64,12 @@ $nav-icon: var(--nav-icon);
 $rounded: 0.5rem;
 $form-search: var(--form-serach);
 $border-form: 1px solid var(--border-form);
+$bg-card: var(--bg-card);
 $navy-blue: var(--navy-blue);
+$text-light: #e8e8e8;
 
 // Breakpoint
 $xl: 1200px;
 $lg: 992px;
-$md: 767px;
+$md: 768px;
 $sm: 576px;

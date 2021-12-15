@@ -1,24 +1,33 @@
 <template>
   <nav class="d-flex align-items-center py-3 w-100 navbar">
     <div class="container d-flex justify-content-between align-items-center">
-      <NuxtLink :to="{name: 'index'}" class="link"> 
-        <img src="/logo/logo-movie.png" alt="logo" class="logo">
+      <NuxtLink :to="{ name: 'index' }">
+        <img src="/logo/logo-movie.png" alt="logo" class="logo" />
       </NuxtLink>
 
       <ul class="mb-0 nav-list" :class="isOpen ? 'active' : ''">
         <li class="mx-3 nav-item">
-         <NuxtLink :to="{name: 'movies'}" class="link">Movies</NuxtLink>
+          <NuxtLink :to="{ name: 'index' }" class="link">Home</NuxtLink>
         </li>
         <li class="mx-3 nav-item">
-         <NuxtLink :to="{name: 'tv-show'}" class="link">TV Shows</NuxtLink>
+          <NuxtLink :to="{ name: 'movie' }" class="link">Movies</NuxtLink>
+        </li>
+        <li class="mx-3 nav-item">
+          <NuxtLink :to="{ name: 'tv-show' }" class="link">TV Series</NuxtLink>
         </li>
         <li class="mx-3 nav-item">
           <div class="d-flex">
-            <input class="form-control mr-2" type="text" placeholder="Search Movie...">
-            <button class="btn-search"><fa icon="search" class="icon" /></button>
+            <input
+              class="form-control mr-2"
+              type="text"
+              placeholder="Search Movie..."
+            />
+            <button class="btn-search">
+              <fa icon="search" class="icon" />
+            </button>
           </div>
         </li>
-        <li class="mx-3 nav-item d-none d-md-block">
+        <li class="mx-3 nav-item d-none d-lg-block">
           <button @click="toggleDarkMode" class="btn-mode">
             <span v-if="$colorMode.preference == 'light'">
               <fa icon="sun" />
@@ -30,7 +39,7 @@
         </li>
       </ul>
 
-      <div class="d-flex d-md-none align-items-center">
+      <div class="d-flex d-lg-none align-items-center">
         <button @click="toggleDarkMode" class="btn-mode mr-3">
           <span v-if="$colorMode.preference == 'light'">
             <fa icon="sun" />
@@ -47,7 +56,6 @@
           </div>
         </button>
       </div>
-
     </div>
   </nav>
 </template>
@@ -56,57 +64,57 @@
 export default {
   data() {
     return {
-      isOpen: null
+      isOpen: null,
     }
   },
   methods: {
     toggleDarkMode() {
-      if (this.$colorMode.preference !== "light") {
-        this.$colorMode.preference = "light"
+      if (this.$colorMode.preference !== 'light') {
+        this.$colorMode.preference = 'light'
       } else {
-        this.$colorMode.preference = "dark"
+        this.$colorMode.preference = 'dark'
       }
     },
     toggleNav() {
       this.isOpen = !this.isOpen
-    }
+    },
   },
   mounted() {
-    window.addEventListener("scroll", () => {
-      const navbar = document.querySelector(".navbar")
-      navbar.classList.toggle("sticky", window.scrollY > 20)
+    window.addEventListener('scroll', () => {
+      const navbar = document.querySelector('.navbar')
+      navbar.classList.toggle('sticky', window.scrollY > 20)
     })
-  }
+  },
 }
 </script>
 
 <style lang="scss" scoped>
-@media (min-width: $md) {
+@media (min-width: $lg) {
   .sticky {
     background: $bg-navbar;
-    box-shadow: 0px 10px 15px -15px rgba(0,0,0,0.25);
+    box-shadow: 0px 10px 15px -15px rgba(0, 0, 0, 0.25);
   }
 }
 
 .navbar {
   position: fixed;
-  transition: .2s ease-in-out;
+  transition: 0.2s ease-in-out;
   z-index: 98;
 
   .logo {
     width: 90px;
-    filter: drop-shadow(0 1px 2px rgba($color: #000, $alpha: .5));
+    filter: drop-shadow(0 1px 2px rgba($color: #000, $alpha: 0.5));
   }
 
   .link {
     color: $color-primary;
     text-decoration: none;
-    transition: .2s ease-in-out;
+    transition: 0.2s ease-in-out;
   }
 
   .nuxt-link-exact-active {
     color: $color-secondary;
-    transition: .2s ease-in-out;
+    transition: 0.2s ease-in-out;
   }
 
   .nav-list {
@@ -135,7 +143,7 @@ export default {
         border-radius: $rounded;
         padding: 0 10px;
         background: none;
-        transition: .3s ease-in-out;
+        transition: 0.3s ease-in-out;
 
         &:hover {
           background: $color-secondary;
@@ -159,18 +167,17 @@ export default {
   color: $color-primary;
 }
 
-
-@media (max-width: $md) {
+@media (max-width: $lg) {
   .navbar {
     background: $bg-navbar;
-    box-shadow: 0px -10px 15px -15px rgba(0,0,0,0.25);
+    box-shadow: 0px -10px 15px -15px rgba(0, 0, 0, 0.25);
     bottom: 0;
     left: 0;
     z-index: 99;
 
     .nav-list {
       position: absolute;
-      right: 10px;
+      right: 2.5%;
       width: 95%;
       bottom: -250px;
       padding: 1rem 0;
@@ -179,8 +186,8 @@ export default {
       align-items: flex-start;
       background: $bg-navbar;
       border-radius: $rounded;
-      box-shadow: 0px 0px 30px -15px rgba(0,0,0,0.25);
-      transition: .3s ease-in-out;
+      box-shadow: 0px 0px 30px -15px rgba(0, 0, 0, 0.25);
+      transition: 0.3s ease-in-out;
       z-index: 99;
 
       .nav-item {
@@ -210,8 +217,8 @@ export default {
     margin: 5px 0 5px auto;
     background: $color-secondary;
     filter: drop-shadow(0 0px 2px $color-secondary);
-    transition: .3s ease-in-out;
-    
+    transition: 0.3s ease-in-out;
+
     &:first-child {
       width: 21.5px;
     }
@@ -220,7 +227,7 @@ export default {
       width: 15.5px;
     }
   }
-  
+
   .menu-bar.is-active .bar:nth-child(2) {
     opacity: 0;
   }
