@@ -1,0 +1,32 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Readex Pro', sans-serif;
+  color: $color-primary;
+  background-color: $bg;
+  transition: 0.2s ease-in-out;
+}
+
+@media (max-width: $md) {
+  body {
+    margin-bottom: 100px;
+  }
+}
+
+.nuxt-progress {
+  filter: drop-shadow(0 0 2px $color-secondary);
+}
+
+.pages-enter-active,
+.pages-leave-active {
+  transition: 0.2s ease-in-out;
+}
+.pages-enter,
+.pages-leave-to {
+  opacity: 0;
+  transform: translateY(-7.5px);
+}
