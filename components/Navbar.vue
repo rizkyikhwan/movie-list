@@ -7,10 +7,7 @@
 
       <ul class="mb-0 nav-list" :class="isOpen ? 'active' : ''">
         <li class="mx-3 nav-item">
-          <NuxtLink :to="{ name: 'index' }" class="link">Home</NuxtLink>
-        </li>
-        <li class="mx-3 nav-item">
-          <NuxtLink :to="{ name: 'movie' }" class="link">Movies</NuxtLink>
+          <NuxtLink :to="{ name: 'index' }" class="link">Movies</NuxtLink>
         </li>
         <li class="mx-3 nav-item">
           <NuxtLink :to="{ name: 'tv-show' }" class="link">TV Series</NuxtLink>
@@ -20,7 +17,7 @@
             <input
               class="form-control mr-2"
               type="text"
-              placeholder="Search Movie..."
+              placeholder="Search..."
             />
             <button class="btn-search">
               <fa icon="search" class="icon" />
@@ -99,7 +96,7 @@ export default {
 .navbar {
   position: fixed;
   transition: 0.2s ease-in-out;
-  z-index: 98;
+  z-index: 99;
 
   .logo {
     width: 90px;
@@ -188,7 +185,7 @@ export default {
       border-radius: $rounded;
       box-shadow: 0px 0px 30px -15px rgba(0, 0, 0, 0.25);
       transition: 0.3s ease-in-out;
-      z-index: 99;
+      z-index: 98;
 
       .nav-item {
         width: 91%;

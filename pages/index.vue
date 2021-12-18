@@ -2,14 +2,15 @@
   <main class="home">
     <div class="container">
       <div class="row mb-4 mb-md-5">
-        <div class="col-md-8 mb-4 mb-md-0">
+        <div class="col-lg-8 mb-4 mb-md-0">
           <NowPlaying />
         </div>
-        <div class="col-md-4 mb-4 mb-md-0">
-          <PopularSeries />
+        <div class="col-lg-4 mb-4 mb-md-0">
+          <TopRated />
         </div>
       </div>
       <Trending />
+      <Providers />
     </div>
   </main>
 </template>

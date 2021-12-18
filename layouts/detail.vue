@@ -1,13 +1,11 @@
 <template>
-  <div>
-    <p>ini movie</p>
-  </div>
+  <main>
+    <Nuxt keep-alive />
+  </main>
 </template>
 
 <script>
-export default {
-
-}
+export default {}
 </script>
 
 <style>

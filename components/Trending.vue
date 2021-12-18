@@ -1,7 +1,17 @@
 <template>
-  <section class="trending">
-    <div class="d-flex justify-content-between align-items-center">
-      <h1 class="title">Trending Movies & TV Series</h1>
+  <section class="trending mb-5">
+    <h1 class="title">Trending Movies</h1>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <div class="chose-trending" @change="$fetch">
+        <input v-model.lazy="query" value="week" type="radio" id="trending-1" class="d-none" />
+        <input v-model.lazy="query" value="day" type="radio" id="trending-2" class="d-none" />
+        <label for="trending-1" class="trending-1">
+          <span>This Week</span>
+        </label>
+        <label for="trending-2" class="trending-2">
+          <span>Today</span>
+        </label>
+      </div>
       <div class="wrap-navigation d-none d-md-flex">
         <button id="prev" class="btn-nav d-flex align-items-center bg-transparent">
           <fa icon="chevron-left" class="icon-nav" />
@@ -13,7 +23,9 @@
     </div>
     <swiper :options="swiperOption" class="swiper">
       <swiper-slide v-for="trending in trendings" :key="trending.id">
-        <CardTrending :trending="trending" />
+        <NuxtLink :to="{name: 'movies-id', params: { id: trending.id }}" class="link">
+          <CardTrending :trending="trending" />
+        </NuxtLink>
       </swiper-slide>
     </swiper>
   </section>
@@ -24,6 +36,7 @@ export default {
   data() {
     return {
       trendings: [],
+      query: 'week',
       swiperOption: {
         spaceBetween: 10,
         slidesPerView: 2,
@@ -33,9 +46,13 @@ export default {
             spaceBetween: 10,
           },
           768: {
-            slidesPerView: 5,
+            slidesPerView: 4,
             spaceBetween: 10,
           },
+          992: {
+            slidesPerView: 5,
+            spaceBetween: 10,
+          }
         },
         navigation: {
           nextEl: '#next',
@@ -50,7 +67,7 @@ export default {
   methods: {
     async getTrending() {
       const data = await this.$axios.$get(
-        `/trending/all/week?api_key=${process.env.apiKey}`
+        `/trending/movie/${this.query}?api_key=${process.env.apiKey}`
       )
       this.trendings = data.results
     },
@@ -59,10 +76,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.trending {
-  min-height: 100vh;
-}
-
 .title {
   font-size: 1.75rem;
 }
@@ -87,9 +100,41 @@ export default {
   }
 }
 
+.chose-trending {
+  display: inline-block;
+  background: $bg-card;
+  border-radius: $rounded;
+  filter: drop-shadow(0 0 2px $color-secondary);
+}
+
+@for $i from 1 through 2 {
+  .trending-#{$i} {
+    border-radius: $rounded;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin-bottom: 0;
+    transition: .3s ease-in-out;
+  }
+}
+
+@for $i from 1 through 2 {
+  #trending-#{$i}:checked:checked ~ .trending-#{$i} {
+    border-radius: $rounded;
+    color: $toggle-text;
+    background: $color-secondary;
+    filter: drop-shadow(0 0 2px $color-secondary);
+    transition: .3s ease-in-out;
+  }
+}
+
 .swiper {
   padding: 5px 15px 0px 0px;
   z-index: 0;
+
+  .link {
+    color: $color-primary;
+    text-decoration: none;
+  }
 }
 
 @media (max-width: $sm) {

@@ -1,7 +1,7 @@
 <template>
   <div class="card-now-playing">
     <img
-      :src="`${$config.img}/${now_playing.backdrop_path}`"
+      :src="`${$config.banner}/${now_playing.backdrop_path}`"
       :alt="now_playing.title"
       class="img-fluid banner"
     />
@@ -41,7 +41,13 @@ export default {
 .card-now-playing {
   position: relative;
   text-align: center;
-  color: $text-light;
+  color: $text-white;
+
+  &:hover .title {
+    color: $color-secondary;
+    filter: drop-shadow(0 0 1px $color-secondary);
+    transition: .2s ease-in-out;
+  }
 
   &::before {
     content: "";

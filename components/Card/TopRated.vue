@@ -1,19 +1,22 @@
 <template>
-  <div class="card-popular-series">
-    <img :src="`${$config.img}/${serie.backdrop_path}`" :alt="serie.title" class="img-fluid shadow poster">
+  <div class="card-top-rated">
+    <img :src="`${$config.banner}/${mov_last.backdrop_path}`" :alt="mov_last.title" class="img-fluid shadow poster">
       <div class="info">
-        <h6 class="title mb-n1">{{ serie.name }} </h6>
-        <small class="font-weight-light">{{ getDate(serie.first_air_date) }}</small>
+        <h6 class="title mb-n1">
+          {{ mov_last.title.slice(0, 25) }}
+          <span v-if="mov_last.title.length > 25">...</span>
+        </h6>
+        <small class="font-weight-light">{{ getDate(mov_last.release_date) }}</small>
       </div>
       <small class="rating shadow">
-      <fa icon="star" class="star" /> {{ serie.vote_average }}
+      <fa icon="star" class="star" /> {{ mov_last.vote_average }}
     </small>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['serie'],
+  props: ['mov_last'],
   methods: {
     getDate(value) {
       return new Date(value).toLocaleString('en-US', {
@@ -27,10 +30,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.card-popular-series {
+.card-top-rated {
   position: relative;
-  color: $text-light;
+  color: $text-white;
   
+  &:hover .title{
+    color: $color-secondary;
+    filter: drop-shadow(0 0 1px $color-secondary);
+    transition: .2s ease-out;
+  }
 
   &::before {
     content: '';
@@ -55,6 +63,7 @@ export default {
     .title {
       font-weight: 600;
       letter-spacing: 1.25px;
+      font-size: 1.5vh;
     }
   }
 

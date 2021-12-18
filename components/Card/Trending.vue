@@ -6,15 +6,7 @@
       class="img-fluid shadow poster"
     />
     <div
-      class="
-        info
-        d-flex
-        flex-column
-        align-items-start
-        justify-content-center
-        mt-1
-        p-1
-      "
+      class="info d-flex flex-column align-items-start justify-content-center mt-1 p-1"
     >
       <h6 v-if="trending.title" class="title mb-1 font-weight-bold">
         {{ trending.title.slice(0, 30) }}
@@ -54,6 +46,12 @@ export default {
 <style lang="scss" scoped>
 .card-trending {
   position: relative;
+
+  &:hover .title {
+    color: $color-secondary;
+    filter: drop-shadow(0 0 1px $color-secondary);
+    transition: .2s ease-in-out;
+  }
 
   .poster {
     border-radius: $rounded;
