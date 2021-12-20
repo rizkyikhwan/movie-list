@@ -1,22 +1,22 @@
 <template>
   <div class="card-top-rated">
-    <img :src="`${$config.banner}/${mov_last.backdrop_path}`" :alt="mov_last.title" class="img-fluid shadow poster">
+    <img :src="`${$config.banner}/${discover.backdrop_path}`" :alt="discover.title" class="img-fluid shadow poster">
       <div class="info">
         <h6 class="title mb-n1">
-          {{ mov_last.title.slice(0, 25) }}
-          <span v-if="mov_last.title.length > 25">...</span>
+          {{ discover.title.slice(0, 25) }}
+          <span v-if="discover.title.length > 25">...</span>
         </h6>
-        <small class="font-weight-light">{{ getDate(mov_last.release_date) }}</small>
+        <small class="font-weight-light">{{ getDate(discover.release_date) }}</small>
       </div>
       <small class="rating shadow">
-      <fa icon="star" class="star" /> {{ mov_last.vote_average }}
+      <fa icon="star" class="star" /> {{ discover.vote_average }}
     </small>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['mov_last'],
+  props: ['discover'],
   methods: {
     getDate(value) {
       return new Date(value).toLocaleString('en-US', {

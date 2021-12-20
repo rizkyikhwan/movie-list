@@ -76,25 +76,26 @@ export default {
       this.isOpen = !this.isOpen
     },
   },
-  mounted() {
-    window.addEventListener('scroll', () => {
-      const navbar = document.querySelector('.navbar')
-      navbar.classList.toggle('sticky', window.scrollY > 20)
-    })
-  },
+  // mounted() {
+  //   window.addEventListener('scroll', () => {
+  //     const navbar = document.querySelector('.navbar')
+  //     navbar.classList.toggle('sticky', window.scrollY > 20)
+  //   })
+  // },
 }
 </script>
 
 <style lang="scss" scoped>
-@media (min-width: $lg) {
-  .sticky {
-    background: $bg-navbar;
-    box-shadow: 0px 10px 15px -15px rgba(0, 0, 0, 0.25);
-  }
-}
+// @media (min-width: $lg) {
+//   .sticky {
+//     background: $bg-navbar;
+//     box-shadow: 0px 10px 15px -15px rgba(0, 0, 0, 0.25);
+//   }
+// }
 
 .navbar {
-  position: fixed;
+  position: absolute;
+  background: rgba(var(--bg-navbar), .5);
   transition: 0.2s ease-in-out;
   z-index: 99;
 
@@ -166,6 +167,7 @@ export default {
 
 @media (max-width: $lg) {
   .navbar {
+    position: fixed;
     background: $bg-navbar;
     box-shadow: 0px -10px 15px -15px rgba(0, 0, 0, 0.25);
     bottom: 0;

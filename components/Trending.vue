@@ -22,11 +22,11 @@
       </div>
     </div>
     <swiper :options="swiperOption" class="swiper">
-      <swiper-slide v-for="trending in trendings" :key="trending.id">
-        <NuxtLink :to="{name: 'movies-id', params: { id: trending.id }}" class="link">
-          <CardMovie :movie="trending" />
-        </NuxtLink>
-      </swiper-slide>
+        <swiper-slide v-for="trending in trendings" :key="trending.id">
+          <NuxtLink :to="{name: 'movies-id', params: { id: trending.id }}" class="link">
+            <CardMovie :movie="trending" />
+          </NuxtLink>
+        </swiper-slide>
     </swiper>
   </section>
 </template>
@@ -128,8 +128,11 @@ export default {
 }
 
 .swiper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(1fr));
   padding: 5px 15px 0px 0px;
   z-index: 0;
+
 
   .link {
     color: $color-primary;

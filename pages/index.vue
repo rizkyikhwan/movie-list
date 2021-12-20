@@ -6,11 +6,11 @@
           <NowPlaying />
         </div>
         <div class="col-lg-4 mb-4 mb-md-0">
-          <TopRated />
+          <Discover />
         </div>
       </div>
       <Trending />
-      <Providers />
+      <AllMovies />
     </div>
   </main>
 </template>

@@ -21,6 +21,15 @@ body {
   filter: drop-shadow(0 0 2px $color-secondary);
 }
 
+.route {
+  color: $color-primary;
+  text-decoration: underline;
+
+  &:hover {
+    color: $color-primary;
+  }
+}
+
 .pages-enter-active,
 .pages-leave-active {
   transition: 0.2s ease-in-out;

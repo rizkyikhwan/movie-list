@@ -2,9 +2,11 @@
   <main class="movie-detail">
     <header class="backdrop">
       <img
+        v-if="movie.backdrop_path"
         :src="`${$config.backdrop}/${movie.backdrop_path}`"
         :alt="movie.title"
       />
+      <img v-else src="/profile/backdrop-not-avail.png" alt="">
     </header>
     <div class="container section-info">
       <MovieInfo :movie="movie" @toggleTrailer="toggleTrailer" />
@@ -20,6 +22,7 @@
 
 <script>
 export default {
+  // layout: 'detail',
   data() {
     return {
       movie: {},
@@ -49,7 +52,7 @@ export default {
       crews: crews.crew.filter(
         (crew) =>
           crew.job == 'Director' ||
-          crew.job == 'Stroy' ||
+          crew.job == 'Story' ||
           crew.job == 'Creator' ||
           crew.job == 'Writer'
       ),

@@ -1,5 +1,5 @@
 <template>
-  <div class="card-movie" v-if="movie.backdrop_path !== null">
+  <div class="card-movie">
     <img
       :src="`${$config.poster}/${movie.poster_path}`"
       :alt="movie.title"
