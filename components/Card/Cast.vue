@@ -1,7 +1,12 @@
 <template>
   <div class="card-cast">
-    <img :src="`${$config.backdrop}/${actor.profile_path}`" v-if="actor.profile_path" :alt="actor.original_name" class="img-fluid shadow" />
-    <img src="/profile/not-avail.png" v-else alt="" class="img-fluid">
+    <img
+      :src="`${$config.backdrop}/${actor.profile_path}`"
+      v-if="actor.profile_path"
+      :alt="actor.original_name"
+      class="img-fluid shadow"
+    />
+    <img src="/profile/not-avail.png" v-else alt="not avail" class="img-fluid" />
     <div class="body-card text-center mt-1">
       <p class="font-weight-bold mb-0 actor">{{ actor.original_name }}</p>
       <p>{{ actor.character }}</p>
@@ -18,7 +23,7 @@ export default {
 <style lang="scss" scoped>
 .card-cast {
   position: relative;
-  font-size: .8rem;
+  font-size: 0.8rem;
 
   img {
     border-radius: $rounded;
@@ -31,7 +36,7 @@ export default {
 
 @media (max-width: $md) {
   .card-cast {
-    font-size: .7rem;
+    font-size: 0.7rem;
   }
 }
 </style>

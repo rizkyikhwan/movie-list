@@ -1,72 +1,79 @@
 <template>
   <main class="movie-detail">
-    <p v-if="$fetchState.pending">Loading...</p>
-    <div v-else>
-      <header class="backdrop">
-        <img :src="`${$config.backdrop}/${movie.backdrop_path}`" :alt="movie.title">
-      </header>
-      <div class="container section-info">
-        <MovieInfo :movie="movie" />
-        <MovieInfoDetail :movie="movie" :crews="crews" :actors="actors" />
-        <!-- <div class="wrap-trailer">
-          <iframe
-            :src="`https://www.youtube-nocookie.com/embed/${trailer.key}?version=3&enablejsapi=1`"
-            frameBorder="0"
-            allowFullScreen
-            class="container-fluid"
-            width="560" height="315"
-            />
-        </div> -->
-      </div>
+    <header class="backdrop">
+      <img
+        :src="`${$config.backdrop}/${movie.backdrop_path}`"
+        :alt="movie.title"
+      />
+    </header>
+    <div class="container section-info">
+      <MovieInfo :movie="movie" @toggleTrailer="toggleTrailer" />
+      <MovieInfoDetail :movie="movie" :crews="crews" :actors="actors" />
+      <MovieRecommend :recommended="recommended" />
+      <MovieReview />
+    </div>
+    <div class="overlay" :class="isOpen ? 'active' : ''" @click="toggleTrailer">
+      <MovieTrailer :trailer="trailer" />
     </div>
   </main>
 </template>
 
 <script>
 export default {
-  layout: 'detail',
   data() {
     return {
       movie: {},
-      trailer: {},
       crews: [],
-      actors: []
+      actors: [],
+      trailer: {},
+      recommended: [],
+      isOpen: null,
     }
   },
-  async fetch() {
-    await this.getMovie()
-
-    await this.getTrailer()
-
-    await this.getCrew()
+  async asyncData({ $axios, route }) {
+    const { id } = route.params
+    const movie = await $axios.$get(
+      `/movie/${id}?api_key=${process.env.apiKey}&language=en-US`
+    )
+    const crews = await $axios.$get(
+      `/movie/${id}/credits?api_key=${process.env.apiKey}&language=en-US`
+    )
+    const trailer = await $axios.$get(
+      `/movie/${id}/videos?api_key=${process.env.apiKey}`
+    )
+    const recommend = await $axios.$get(
+      `/movie/${id}/recommendations?api_key=${process.env.apiKey}&language=en-US&page=1`
+    )
+    return {
+      movie: movie,
+      crews: crews.crew.filter(
+        (crew) =>
+          crew.job == 'Director' ||
+          crew.job == 'Stroy' ||
+          crew.job == 'Creator' ||
+          crew.job == 'Writer'
+      ),
+      actors: crews.cast,
+      trailer: trailer.results.find((trailer) => trailer.type === 'Trailer') || '',
+      recommended: recommend.results,
+    }
   },
   methods: {
-    async getMovie() {
-      const data = await this.$axios.$get(`/movie/${this.$route.params.id}?api_key=${process.env.apiKey}&language=en-US`)
-      this.movie = data
+    toggleTrailer() {
+      this.isOpen = !this.isOpen
+      const trailer = document.querySelector('.trailer')
+      trailer.contentWindow.postMessage('{"event":"command", "func":"stopVideo", "args":""}','*')
     },
-    async getTrailer() {
-      const data = await this.$axios.$get(`/movie/${this.$route.params.id}/videos?api_key=${process.env.apiKey}`)
-      this.trailer = data.results.find(trailer => trailer.type === 'Trailer')
-    },
-    async getCrew() {
-      const data = await this.$axios.$get(`/movie/${this.$route.params.id}/credits?api_key=${process.env.apiKey}&language=en-US`)
-      this.crews = data.crew.filter(crew => crew.job == "Director" || crew.job == "Story" || crew.job == "Creator" || crew.job == "Writer")
-      this.actors = data.cast
-    }
-  }
+  },
 }
 </script>
 
 <style lang="scss" scoped>
 .movie-detail {
-  min-height: 100vh;
-
   .backdrop {
     position: relative;
-    transform: translateY(-10%);
 
-    &::before{
+    &::before {
       content: '';
       position: absolute;
       width: 100%;
@@ -85,10 +92,25 @@ export default {
   }
 
   .section-info {
-    transform: translateY(-150px);
+    transform: translateY(-125px);
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 999;
+    display: none;
+  }
+
+  .active {
+    display: block;
   }
 }
-
 
 @media (max-width: $sm) {
   .movie-detail .backdrop img {

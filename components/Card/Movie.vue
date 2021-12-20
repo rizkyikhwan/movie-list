@@ -1,36 +1,35 @@
 <template>
-  <div class="card-trending">
+  <div class="card-movie" v-if="movie.backdrop_path !== null">
     <img
-      :src="`${$config.poster}/${trending.poster_path}`"
-      :alt="trending.title"
+      :src="`${$config.poster}/${movie.poster_path}`"
+      :alt="movie.title"
       class="img-fluid shadow poster"
     />
     <div
       class="info d-flex flex-column align-items-start justify-content-center mt-1 p-1"
     >
-      <h6 v-if="trending.title" class="title mb-1 font-weight-bold">
-        {{ trending.title.slice(0, 30) }}
-        <span v-if="trending.title.length > 30">...</span>
+      <h6 v-if="movie.title" class="title mb-1 font-weight-bold">
+        {{ movie.title.slice(0, 30) }}
+        <span v-if="movie.title.length > 30">...</span>
       </h6>
       <h6 v-else class="title mb-1 font-weight-bold">
-        {{ trending.name.slice(0, 30) }}
-        <span v-if="trending.name.length > 30">...</span>
+        {{ movie.name.slice(0, 30) }}
+        <span v-if="movie.name.length > 30">...</span>
       </h6>
-      <small :class="trending.media_type === 'tv' ? 'text-uppercase' : 'text-capitalize'">({{ trending.media_type }})</small>
       <p class="rating mb-1">
-        <fa icon="star" class="star" /> {{ trending.vote_average }} ({{
-          trending.vote_count
+        <fa icon="star" class="star" /> {{ movie.vote_average }} ({{
+          movie.vote_count
         }})
       </p>
-      <small v-if="trending.release_date">{{ getDate(trending.release_date) }}</small>
-      <small v-else>{{ getDate(trending.first_air_date) }}</small>
+      <small v-if="movie.release_date">{{ getDate(movie.release_date) }}</small>
+      <small v-else>{{ getDate(movie.first_air_date) }}</small>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['trending'],
+  props: ['movie'],
   methods: {
     getDate(value) {
       return new Date(value).toLocaleString('en-US', {
@@ -44,7 +43,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.card-trending {
+.card-movie {
   position: relative;
 
   &:hover .title {
@@ -88,7 +87,7 @@ export default {
 }
 
 @media (max-width: $lg) {
-  .card-trending .title {
+  .card-movie .title {
     font-size: .9rem;
   }
 }

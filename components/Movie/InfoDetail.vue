@@ -1,7 +1,7 @@
 <template>
   <div class="row info-detail">
-    <div class="col-md-10 mb-4 mb-md-0">
-      <div class="grid-detail">
+    <div class="col-lg-10 mb-4 mb-md-0">
+      <div class="grid-detail mb-3">
         <div class="order-1">
           <h5 class="title font-weight-bold">Overview</h5>
           <p class="text-justify">{{ movie.overview }}</p>
@@ -16,10 +16,10 @@
       <div class="d-flex justify-content-between align-items-center mb-2">
         <h5 class="title font-weight-bold">Cast</h5>
         <div class="wrap-navigation d-none d-md-flex">
-          <button id="prev" class="btn-nav d-flex align-items-center bg-transparent">
+          <button id="prev-cast" class="btn-nav d-flex align-items-center bg-transparent">
             <fa icon="chevron-left" class="icon-nav" />
           </button>
-          <button id="next" class="btn-nav d-flex align-items-center bg-transparent">
+          <button id="next-cast" class="btn-nav d-flex align-items-center bg-transparent">
             <fa icon="chevron-right" class="icon-nav" />
           </button>
         </div>
@@ -31,7 +31,7 @@
         <div class="swiper-scrollbar" slot="scrollbar"></div>
       </swiper>
     </div>
-    <div class="col-md-2 grid-info">
+    <div class="col-lg-2 grid-info">
       <div>
         <h5 class="title font-weight-bold">Status</h5>
         <p>{{ movie.status }}</p>
@@ -96,8 +96,8 @@ export default {
           }
         },
         navigation: {
-          nextEl: '#next',
-          prevEl: '#prev'
+          nextEl: '#next-cast',
+          prevEl: '#prev-cast'
         },
         scrollbar: {
             el: '.swiper-scrollbar',
@@ -113,10 +113,10 @@ export default {
       return value ? `${hour}h ${minute}m` : ''
     },
     currency(value) {
-      return value.toLocaleString('en-US', {
+      return new Intl.NumberFormat('en-US', {
         style: 'currency',
-        currency: 'USD',
-      })
+        currency: 'USD'
+      }).format(value)
     },
     getRelease(value) {
       return new Date(value).toLocaleString('en-US', {
@@ -131,13 +131,8 @@ export default {
 
 <style lang="scss" scoped>
 .info-detail {
-  font-size: calc(14px + .5vmin);
+  font-size: calc(12px + .5vmin);
 }
-
-// .swiper {
-//   padding: 5px 15px 0px 0px;
-//   z-index: 0;
-// }
 
 .grid-info {
   display: grid;
@@ -173,9 +168,15 @@ export default {
   }
 }
 
-@media (max-width: $md) {
+@media (max-width: $lg) {
   .grid-info {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: $sm) {
+  .title {
+    font-size: 1rem;
   }
 }
 </style>

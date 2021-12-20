@@ -13,10 +13,10 @@
         </label>
       </div>
       <div class="wrap-navigation d-none d-md-flex">
-        <button id="prev" class="btn-nav d-flex align-items-center bg-transparent">
+        <button id="prev-trending" class="btn-nav d-flex align-items-center bg-transparent">
           <fa icon="chevron-left" class="icon-nav" />
         </button>
-        <button id="next" class="btn-nav d-flex align-items-center bg-transparent">
+        <button id="next-trending" class="btn-nav d-flex align-items-center bg-transparent">
           <fa icon="chevron-right" class="icon-nav" />
         </button>
       </div>
@@ -24,7 +24,7 @@
     <swiper :options="swiperOption" class="swiper">
       <swiper-slide v-for="trending in trendings" :key="trending.id">
         <NuxtLink :to="{name: 'movies-id', params: { id: trending.id }}" class="link">
-          <CardTrending :trending="trending" />
+          <CardMovie :movie="trending" />
         </NuxtLink>
       </swiper-slide>
     </swiper>
@@ -55,8 +55,8 @@ export default {
           }
         },
         navigation: {
-          nextEl: '#next',
-          prevEl: '#prev'
+          nextEl: '#next-trending',
+          prevEl: '#prev-trending'
         }
       },
     }

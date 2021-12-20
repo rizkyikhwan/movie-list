@@ -60,7 +60,7 @@ export default {
   }
 }
 
-@media (max-width: $xs) {
+@media (max-width: $sm) {
   .grid-latest {
     grid-template-columns: 1fr;
   }

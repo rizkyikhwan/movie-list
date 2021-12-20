@@ -97,6 +97,7 @@ export default {
     backdrop: process.env.BACKDROP,
     banner: process.env.BANNER,
     poster: process.env.POSTER,
+    trailer: process.env.TRAILER
   },
   
   privateRuntimeConfig: {
