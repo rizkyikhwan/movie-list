@@ -1,20 +1,20 @@
 <template>
   <section class="all-movies mb-5">
-    <div class="mb-5">
-    <h1 class="title">All Movies</h1>
-    <div class="d-flex justify-content-between align-items-end">
-      <select v-model="based_on" @change="$fetch" class="form-control">
-        <option value="popular">Popular</option>
-        <option value="upcoming">Upcoming</option>
-        <option value="top_rated">Top Rated</option>
-      </select>
-      <NuxtLink to="/" class="route">View All</NuxtLink>
-    </div>
+    <div class="mb-4">
+      <h1 class="title">All Movies</h1>
+      <div class="d-flex justify-content-between align-items-end">
+        <select v-model="based_on" @change="$fetch" class="form-control">
+          <option value="popular">Popular</option>
+          <option value="upcoming">Upcoming</option>
+          <option value="top_rated">Top Rated</option>
+        </select>
+        <NuxtLink to="/" class="route">View All</NuxtLink>
+      </div>
     </div>
     <div class="grid-movie">
       <div v-for="movie in movies" :key="movie.id" class="movie">
         <NuxtLink :to="{name: 'movies-id', params: {id: movie.id}}" class="link">
-          <CardMovie :movie="movie" />
+          <Card :show="movie" />
         </NuxtLink>
       </div>
     </div>

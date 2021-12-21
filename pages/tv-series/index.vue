@@ -1,33 +1,32 @@
 <template>
-  <main class="home">
+  <main class="tv-series">
     <div class="container">
       <div class="row mb-4 mb-md-5">
-        <div class="col-lg-8 mb-4 mb-md-0">
-          <MoviePlaying />
-        </div>
         <div class="col-lg-4 mb-4 mb-md-0">
-          <MovieDiscover />
+          <TvDiscover />
+        </div>
+        <div class="col-lg-8 mb-4 mb-md-0">
+          <TvOnAir />
         </div>
       </div>
-      <MovieTrending />
-      <MovieCategory />
-      <MovieAll />
+      <TvTrending />
     </div>
   </main>
 </template>
 
 <script>
 export default {
-  name: 'IndexPage',
+
 }
 </script>
 
 <style lang="scss" scoped>
-.home {
+.tv-series {
   padding-top: 95px;
 }
-@media (max-width: $lg) {
-  .home {
+
+@media (max-width: $md) {
+  .tv-series {
     padding-top: 10px;
   }
 }

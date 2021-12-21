@@ -2,11 +2,16 @@
   <div class="card-top-rated">
     <img :src="`${$config.banner}/${discover.backdrop_path}`" :alt="discover.title" class="img-fluid shadow poster">
       <div class="info">
-        <h6 class="title mb-n1">
+        <h6 v-if="discover.title" class="title mb-n1">
           {{ discover.title.slice(0, 25) }}
           <span v-if="discover.title.length > 25">...</span>
         </h6>
-        <small class="font-weight-light">{{ getDate(discover.release_date) }}</small>
+        <h6 v-else class="title mb-n1">
+          {{ discover.name.slice(0, 25) }}
+          <span v-if="discover.name.length > 25">...</span>
+        </h6>
+        <small v-if="discover.release_date" class="font-weight-light">{{ getDate(discover.release_date) }}</small>
+        <small v-else class="font-weight-light">{{ getDate(discover.first_air_date) }}</small>
       </div>
       <small class="rating shadow">
       <fa icon="star" class="star" /> {{ discover.vote_average }}

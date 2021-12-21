@@ -6,13 +6,22 @@
       class="img-fluid banner"
     />
     <div class="info d-flex flex-column align-items-start">
-      <h6 class="title font-weight-bold mb-1">
+      <h6 v-if="now_playing.title" class="title font-weight-bold mb-1">
         {{ now_playing.title.slice(0, 25) }}
         <span v-if="now_playing.title.length > 25">...</span>
       </h6>
-      <small class="font-weight-light mb-2">
+      <h6 v-else class="title font-weight-bold mb-1">
+        {{ now_playing.name.slice(0, 25) }}
+        <span v-if="now_playing.name.length > 25">...</span>
+      </h6>
+      <small v-if="now_playing.release_date" class="font-weight-light mb-2">
         {{
           getRelease(now_playing.release_date)
+        }}
+      </small>
+      <small v-else class="font-weight-light mb-2">
+        {{
+          getRelease(now_playing.first_air_date)
         }}
       </small>
     </div>

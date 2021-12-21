@@ -22,7 +22,11 @@
 
 <script>
 export default {
-  // layout: 'detail',
+  head() {
+    return {
+      title: this.movie.title
+    }
+  },
   data() {
     return {
       movie: {},
@@ -73,8 +77,10 @@ export default {
 
 <style lang="scss" scoped>
 .movie-detail {
+
   .backdrop {
     position: relative;
+    pointer-events: none;
 
     &::before {
       content: '';
@@ -83,7 +89,7 @@ export default {
       height: 100%;
       bottom: -1px;
       left: 0;
-      background-image: linear-gradient(transparent, $bg);
+      background: linear-gradient(to top, $bg,transparent);
     }
 
     img {
@@ -112,6 +118,21 @@ export default {
 
   .active {
     display: block;
+  }
+}
+
+@media (min-width: $lg) {
+.movie-detail .backdrop{
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: -70%;
+      left: 0;
+      background: linear-gradient(to bottom, $bg, transparent);
+    }
   }
 }
 

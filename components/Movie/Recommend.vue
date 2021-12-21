@@ -14,7 +14,7 @@
     <swiper v-if="recommended.length" :options="swiperOption" class="swiper">
       <swiper-slide v-for="(recommend, index) in recommended" :key="index">
         <NuxtLink :to="{name: 'movies-id', params: {id: recommend.id}}" class="link">
-          <CardMovie :movie="recommend" />
+          <Card :show="recommend" />
         </NuxtLink>
       </swiper-slide>
     </swiper>

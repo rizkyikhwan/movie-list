@@ -24,7 +24,7 @@
     <swiper :options="swiperOption" class="swiper">
         <swiper-slide v-for="trending in trendings" :key="trending.id">
           <NuxtLink :to="{name: 'movies-id', params: { id: trending.id }}" class="link">
-            <CardMovie :movie="trending" />
+            <Card :show="trending" />
           </NuxtLink>
         </swiper-slide>
     </swiper>
@@ -128,8 +128,6 @@ export default {
 }
 
 .swiper {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(1fr));
   padding: 5px 15px 0px 0px;
   z-index: 0;
 

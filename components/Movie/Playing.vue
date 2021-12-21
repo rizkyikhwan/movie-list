@@ -7,7 +7,7 @@
           <CardNowPlaying :now_playing="now_playing" />
         </NuxtLink>
       </swiper-slide>
-      <div class="swiper-pagination" slot="pagination"></div>
+      <div id="movie" class="swiper-pagination" slot="pagination"></div>
     </swiper>
   </section>
 </template>
@@ -24,7 +24,7 @@ export default {
           disableOnInteraction: false,
         },
         pagination: {
-          el: '.swiper-pagination',
+          el: '#movie',
           clickable: true,
         },
       },

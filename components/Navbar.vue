@@ -10,19 +10,12 @@
           <NuxtLink :to="{ name: 'index' }" class="link">Movies</NuxtLink>
         </li>
         <li class="mx-3 nav-item">
-          <NuxtLink :to="{ name: 'tv-show' }" class="link">TV Series</NuxtLink>
+          <NuxtLink :to="{ name: 'tv-series' }" class="link">TV Series</NuxtLink>
         </li>
         <li class="mx-3 nav-item">
-          <div class="d-flex">
-            <input
-              class="form-control mr-2"
-              type="text"
-              placeholder="Search..."
-            />
-            <button class="btn-search">
-              <fa icon="search" class="icon" />
-            </button>
-          </div>
+          <button class="btn-search">
+            <fa icon="search" class="icon" />
+          </button>
         </li>
         <li class="mx-3 nav-item d-none d-lg-block">
           <button @click="toggleDarkMode" class="btn-mode">
@@ -76,23 +69,10 @@ export default {
       this.isOpen = !this.isOpen
     },
   },
-  // mounted() {
-  //   window.addEventListener('scroll', () => {
-  //     const navbar = document.querySelector('.navbar')
-  //     navbar.classList.toggle('sticky', window.scrollY > 20)
-  //   })
-  // },
 }
 </script>
 
 <style lang="scss" scoped>
-// @media (min-width: $lg) {
-//   .sticky {
-//     background: $bg-navbar;
-//     box-shadow: 0px 10px 15px -15px rgba(0, 0, 0, 0.25);
-//   }
-// }
-
 .navbar {
   position: absolute;
   background: rgba(var(--bg-navbar), .5);
@@ -108,6 +88,10 @@ export default {
     color: $color-primary;
     text-decoration: none;
     transition: 0.2s ease-in-out;
+
+    &:hover {
+      color: $color-secondary;
+    }
   }
 
   .nuxt-link-exact-active {
@@ -137,9 +121,9 @@ export default {
 
       .btn-search {
         display: inline-block;
-        border: 2px solid $color-secondary;
+        border: 0;
         border-radius: $rounded;
-        padding: 0 10px;
+        padding: 3px 6px;
         background: none;
         transition: 0.3s ease-in-out;
 
@@ -197,8 +181,7 @@ export default {
           display: inline-block;
           border: 2px solid $color-secondary;
           border-radius: $rounded;
-          padding: 0 10px;
-          background: $color-secondary;
+          padding: 3px 6px;
           filter: drop-shadow(0 0 2px $color-secondary);
         }
       }
