@@ -36,16 +36,16 @@ export default {
   async asyncData({ $axios, route }) {
     const { id } = route.params
     const movie = await $axios.$get(
-      `/movie/${id}?api_key=${process.env.apiKey}&language=en-US`
+      `/movie/${id}?api_key=${process.env.apiKey}&language=en-US`, { progress: false }
     )
     const crews = await $axios.$get(
-      `/movie/${id}/credits?api_key=${process.env.apiKey}&language=en-US`
+      `/movie/${id}/credits?api_key=${process.env.apiKey}&language=en-US`, { progress: false }
     )
     const trailer = await $axios.$get(
-      `/movie/${id}/videos?api_key=${process.env.apiKey}`
+      `/movie/${id}/videos?api_key=${process.env.apiKey}`, { progress: false }
     )
     const recommend = await $axios.$get(
-      `/movie/${id}/recommendations?api_key=${process.env.apiKey}&language=en-US&page=1`
+      `/movie/${id}/recommendations?api_key=${process.env.apiKey}&language=en-US&page=1`, { progress: false }
     )
     return {
       movie: movie,

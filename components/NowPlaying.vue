@@ -35,10 +35,10 @@ export default {
   },
   methods: {
     async getNowPlaying() {
-      const data = await this.$axios.$get(
+      const response = await this.$axios.$get(
         `/movie/now_playing?api_key=${process.env.apiKey}&language=en-US&page=1`
       )
-      this.now_playings = data.results.slice(0, 10)
+      this.now_playings = response.results.slice(0, 10)
     },
   },
 }

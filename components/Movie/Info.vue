@@ -5,10 +5,10 @@
       <h2 class="title-movie">{{ (movie.title) }}</h2>
       <div class="genre">
         <span>
-          {{ movie.genres.map(genre => genre.name).join(' | ') }}
+          {{ sortGenre(movie.genres) }}
         </span>
       </div>
-      <p class="mt-3"><fa icon="star" class="icon" /> {{ movie.vote_average }} ({{ movie.vote_count }}) / 10</p>
+      <p class="mt-1"><fa icon="star" class="icon" /> {{ movie.vote_average }} ({{ movie.vote_count }}) / 10</p>
       <button class="d-flex align-items-center btn-trailer" @click="$emit('toggleTrailer')">
         <fa :icon="['fas', 'play']" class="play" />
         <span>Trailer</span>
@@ -20,6 +20,11 @@
 <script>
 export default {
   props: ['movie'],
+  methods: {
+    sortGenre(value) {
+      return value.map(genre => genre.name).join(' | ')
+    }
+  }
 }
 </script>
 

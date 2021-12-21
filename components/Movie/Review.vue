@@ -7,6 +7,7 @@
           <img
             :src="`https://secure.gravatar.com/avatar/${review.author_details.avatar_path}`"
             alt="Profile Review"
+            class="img-fluid shadow picture"
           />
           <div class="profile">
             <p class="mb-0">{{ review.author_details.username }}</p>
@@ -52,10 +53,10 @@ export default {
   },
   methods: {
     async getReview() {
-      const data = await this.$axios.$get(`/movie/${this.$route.params.id}/reviews?api_key=${process.env.apiKey}&language=en-US&page=1`)
-      const dataResource = data.results.slice(this.reviews.length, this.reviews.length + this.limit)
-      this.reviews.push(...dataResource)
-      this.dataLength = data.results
+      const response = await this.$axios.$get(`/movie/${this.$route.params.id}/reviews?api_key=${process.env.apiKey}&language=en-US&page=1`)
+      const data = response.results.slice(this.reviews.length, this.reviews.length + this.limit)
+      this.reviews.push(...data)
+      this.dataLength = response.results
     },
     getCreated(value) {
       return new Date(value).toLocaleString('en-US', {
@@ -86,6 +87,10 @@ export default {
   display: grid;
   grid-template-columns: 80px 1fr;
   gap: 10px;
+
+  .picture {
+    border-radius: $rounded;
+  }
 }
 
 .reviewer {

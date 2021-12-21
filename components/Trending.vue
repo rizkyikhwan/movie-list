@@ -66,10 +66,10 @@ export default {
   },
   methods: {
     async getTrending() {
-      const data = await this.$axios.$get(
+      const response = await this.$axios.$get(
         `/trending/movie/${this.query}?api_key=${process.env.apiKey}`
       )
-      this.trendings = data.results
+      this.trendings = response.results
     },
   },
 }

@@ -29,7 +29,7 @@ export default {
     color: '#2bbb99',
     height: '2.5px',
     throttle: 0,
-    continous: true
+    continuous: true
   },
 
   pageTransition: {

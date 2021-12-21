@@ -34,8 +34,8 @@ export default {
   },
   methods: {
     async getMovies() {
-      const data = await this.$axios.$get(`/movie/${this.based_on}?api_key=${process.env.apiKey}&language=en-US&page=1`)
-      this.movies = data.results
+      const response = await this.$axios.$get(`/movie/${this.based_on}?api_key=${process.env.apiKey}&language=en-US&page=1`)
+      this.movies = response.results
     }
   }
 }
@@ -47,7 +47,15 @@ export default {
 }
 
 .form-control {
-  max-width: 250px;
+  max-width: 200px;
+  background-color: $bg-card;
+  color: $color-primary;
+  border: 1px solid $bg-card;
+  border-radius: $rounded;
+
+  &:focus {
+    box-shadow: none;
+  }
 }
 
 .grid-movie {
