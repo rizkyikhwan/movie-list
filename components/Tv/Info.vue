@@ -1,14 +1,14 @@
 <template>
   <div class="info d-flex align-items-center mb-4">
-    <img :src="`${$config.banner}/${movie.poster_path}`" alt="" class="poster shadow">
+    <img :src="`${$config.banner}/${tv.poster_path}`" alt="" class="poster shadow">
     <div class="ml-3">
-      <h2 class="title-movie">{{ (movie.title) }}</h2>
+      <h2 class="title-tv-series">{{ (tv.name) }}</h2>
       <div class="genre">
         <span>
-          {{ sortGenre(movie.genres) }}
+          {{ sortGenre(tv.genres) }}
         </span>
       </div>
-      <p class="mt-1"><fa icon="star" class="icon" /> {{ movie.vote_average }} ({{ movie.vote_count }}) / 10</p>
+      <p class="mt-1"><fa icon="star" class="icon" /> {{ tv.vote_average }} ({{ tv.vote_count }}) / 10</p>
       <button class="d-flex align-items-center btn-trailer" @click="$emit('trailer')">
         <fa :icon="['fas', 'play']" class="play" />
         <span>Trailer</span>
@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  props: ['movie'],
+  props: ['tv'],
   methods: {
     sortGenre(value) {
       return value.map(genre => genre.name).join(' | ')
@@ -63,7 +63,7 @@ export default {
       width: 150px;
     }
 
-    .title-movie {
+    .title-tv-series {
       font-size: 1.7rem;
     }
   } 
@@ -77,7 +77,7 @@ export default {
       width: 125px;
     }
 
-    .title-movie {
+    .title-tv-series {
       font-size: 1.3rem;
     }
   }

@@ -5,7 +5,13 @@
       <div class="row d-flex align-items-center">
         <div class="col-8">
           <select v-model="category" @change="$fetch" class="form-control">
-            <option v-for="category in categorys" :key="category.id" :value="category.id">{{ category.name }}</option>
+            <option
+              v-for="category in categorys"
+              :key="category.id"
+              :value="category.id"
+            >
+              {{ category.name }}
+            </option>
           </select>
         </div>
         <div class="col-4">
@@ -13,18 +19,27 @@
         </div>
       </div>
       <div class="wrap-navigation d-none d-md-flex">
-        <button id="prev-by-category" class="btn-nav d-flex align-items-center bg-transparent">
+        <button
+          id="prev-by-tv-category"
+          class="btn-nav d-flex align-items-center bg-transparent"
+        >
           <fa icon="chevron-left" class="icon-nav" />
         </button>
-        <button id="next-by-category" class="btn-nav d-flex align-items-center bg-transparent">
+        <button
+          id="next-by-tv-category"
+          class="btn-nav d-flex align-items-center bg-transparent"
+        >
           <fa icon="chevron-right" class="icon-nav" />
         </button>
       </div>
     </div>
     <swiper :options="swiperOption" class="swiper">
-      <swiper-slide v-for="movie in movies" :key="movie.id">
-        <NuxtLink :to="{name: 'movies-id', params: { id: movie.id }}" class="link">
-          <Card :show="movie" />
+      <swiper-slide v-for="tv in tv_series" :key="tv.id">
+        <NuxtLink
+          :to="{ name: 'tv-series-id', params: { id: tv.id } }"
+          class="link"
+        >
+          <Card :show="tv" />
         </NuxtLink>
       </swiper-slide>
     </swiper>
@@ -35,9 +50,9 @@
 export default {
   data() {
     return {
-      movies: [],
+      tv_series: [],
       categorys: [],
-      category: '28',
+      category: '10759',
       swiperOption: {
         spaceBetween: 10,
         slidesPerView: 2,
@@ -53,30 +68,41 @@ export default {
           992: {
             slidesPerView: 5,
             spaceBetween: 10,
-          }
+          },
         },
         navigation: {
-          nextEl: '#next-by-category',
-          prevEl: '#prev-by-category'
-        }
+          nextEl: '#next-by-tv-category',
+          prevEl: '#prev-by-tv-category',
+        },
       },
     }
   },
   async fetch() {
     await this.getCategory()
 
-    await this.getMovie()
+    await this.getTvSeries()
   },
   methods: {
     async getCategory() {
-      const response = await this.$axios.$get(`/genre/movie/list?api_key=${process.env.apiKey}&language=en-US`)
-      this.categorys = response.genres.filter(genre => genre.name !== 'Documentary')
+      const response = await this.$axios.$get(
+        `/genre/tv/list?api_key=${process.env.apiKey}&language=en-US`
+      )
+      this.categorys = response.genres.filter(
+        (genre) =>
+          genre.name !== 'Reality' &&
+          genre.name !== 'Soap' &&
+          genre.name !== 'Talk' &&
+          genre.name !== 'News' &&
+          genre.name !== 'Western'
+      )
     },
-    async getMovie() {
-      const response = await this.$axios.$get(`/discover/movie?api_key=${process.env.apiKey}&language=en-US&with_genres=${this.category}`)
-      this.movies = response.results
-    }
-  }
+    async getTvSeries() {
+      const response = await this.$axios.$get(
+        `/discover/tv?api_key=${process.env.apiKey}&language=en-US&with_genres=${this.category}`
+      )
+      this.tv_series = response.results
+    },
+  },
 }
 </script>
 
@@ -103,7 +129,7 @@ export default {
   .btn-nav {
     border: 0;
     border-radius: $rounded;
-    transition: .2s ease;
+    transition: 0.2s ease;
   }
 
   .swiper-button-disabled {
@@ -120,7 +146,6 @@ export default {
 .swiper {
   padding: 5px 15px 0px 0px;
   z-index: 0;
-
 
   .link {
     color: $color-primary;

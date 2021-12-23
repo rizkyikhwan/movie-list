@@ -1,14 +1,15 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'Movie List',
+    title: 'Movie List - Latest Movie Info',
     htmlAttrs: {
       lang: 'en',
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'All the movies you are looking for are here' },
+      { hid: 'description', name: 'description', content: 'Get all the latest movies & series info you are looking for' },
+      { hid: 'keywords', name: 'keywords', content: 'movies, stream, stremaing' },
       { name: 'format-detection', content: 'telephone=no' },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
@@ -37,10 +38,9 @@ export default {
     mode: 'out-in'
   },
 
-  layoutTransition: {
-    name: 'pages',
-    mode: 'out-in'
-  },
+  serverMiddleware: [
+    '~/middleware/redirects.js'
+  ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
@@ -102,6 +102,7 @@ export default {
     backdrop: process.env.BACKDROP,
     banner: process.env.BANNER,
     poster: process.env.POSTER,
+    network: process.env.NETWORK,
     trailer: process.env.TRAILER
   },
   

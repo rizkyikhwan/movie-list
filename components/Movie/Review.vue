@@ -99,7 +99,7 @@ export default {
   font-size: 14px;
 
   .btn-review {
-    background: $bg-card;
+    background: $bg-select;
     color: $color-primary;
     border: 0;
     border-radius: $rounded;

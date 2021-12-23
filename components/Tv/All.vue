@@ -1,20 +1,20 @@
 <template>
-  <section class="all-movies mb-5">
+  <section class="all-tv-series mb-5">
     <div class="mb-4">
-      <h1 class="title">All Movies</h1>
+      <h1 class="title">All TV Sereis</h1>
       <div class="d-flex justify-content-between align-items-end">
         <select v-model="based_on" @change="$fetch" class="form-control">
           <option value="popular">Popular</option>
-          <option value="upcoming">Upcoming</option>
+          <option value="on_the_air">On the Air</option>
           <option value="top_rated">Top Rated</option>
         </select>
         <NuxtLink to="/" class="route">View All</NuxtLink>
       </div>
     </div>
-    <div class="grid-movie">
-      <div v-for="movie in movies" :key="movie.id" class="movie">
-        <NuxtLink :to="{name: 'movies-id', params: {id: movie.id}}" class="link">
-          <Card :show="movie" />
+    <div class="grid-tv">
+      <div v-for="tv in tv_series" :key="tv.id" class="tv">
+        <NuxtLink :to="{name: 'tv-series-id', params: {id: tv.id}}" class="link">
+          <Card :show="tv" />
         </NuxtLink>
       </div>
     </div>
@@ -25,17 +25,17 @@
 export default {
   data() {
     return {
-      movies: [],
+      tv_series: [],
       based_on: 'popular'
     }
   },
   async fetch() {
-    await this.getMovies()
+    await this.getTvSeries()
   },
   methods: {
-    async getMovies() {
-      const response = await this.$axios.$get(`/movie/${this.based_on}?api_key=${process.env.apiKey}&language=en-US&page=1`)
-      this.movies = response.results
+    async getTvSeries() {
+      const response = await this.$axios.$get(`/tv/${this.based_on}?api_key=${process.env.apiKey}&language=en-US&page=1`)
+      this.tv_series = response.results
     }
   }
 }
@@ -58,7 +58,7 @@ export default {
   }
 }
 
-.grid-movie {
+.grid-tv {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
   justify-content: center;
@@ -78,7 +78,7 @@ export default {
 }
 
 @media (max-width: $xs) {
-  .grid-movie {
+  .grid-tv {
     grid-template-columns: repeat(2, 1fr);
   }
 }

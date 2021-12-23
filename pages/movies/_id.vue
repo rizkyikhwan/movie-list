@@ -9,13 +9,13 @@
       <img v-else src="/profile/backdrop-not-avail.png" alt="">
     </header>
     <div class="container section-info">
-      <MovieInfo :movie="movie" @toggleTrailer="toggleTrailer" />
+      <MovieInfo :movie="movie" @trailer="toggleTrailer" />
       <MovieInfoDetail :movie="movie" :crews="crews" :actors="actors" />
       <MovieRecommend :recommended="recommended" />
       <MovieReview />
     </div>
     <div class="overlay" :class="isOpen ? 'active' : ''" @click="toggleTrailer">
-      <MovieTrailer :trailer="trailer" />
+      <Trailer :trailer="trailer" />
     </div>
   </main>
 </template>

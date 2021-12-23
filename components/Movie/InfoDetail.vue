@@ -2,11 +2,11 @@
   <div class="row info-detail">
     <div class="col-lg-10 mb-4 mb-md-0">
       <div class="grid-detail mb-3">
-        <div class="order-1">
+        <div class="overview">
           <h5 class="title font-weight-bold">Overview</h5>
           <p class="text-justify">{{ movie.overview }}</p>
         </div>
-        <div class="row order-md-1">
+        <div class="row">
           <div v-for="crew in crews" :key="crew.id" class="col-6 col-md-3">
             <h5 class="title font-weight-bold">{{ crew.job }}</h5>
             <p>{{ crew.name }}</p>
@@ -100,9 +100,9 @@ export default {
           prevEl: '#prev-cast'
         },
         scrollbar: {
-            el: '.swiper-scrollbar',
-            hide: true
-          }
+          el: '.swiper-scrollbar',
+          hide: true
+        }
       },
     }
   },

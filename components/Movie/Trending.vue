@@ -102,7 +102,7 @@ export default {
 
 .chose-trending {
   display: inline-block;
-  background: $bg-card;
+  background: $bg-select;
   border-radius: $rounded;
   filter: drop-shadow(0 0 2px $color-secondary);
 }
