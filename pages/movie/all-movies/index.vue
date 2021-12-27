@@ -24,6 +24,11 @@
 
 <script>
 export default {
+  head() {
+    return {
+      title: 'All Movies - See all available movies'
+    }
+  },
   data() {
     return {
       movies: [],

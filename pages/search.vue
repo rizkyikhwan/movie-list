@@ -19,6 +19,12 @@
 
 <script>
 export default {
+  head() {
+    return {
+      title: `${this.$route.query.q}`,
+      titleTemplate: '%s - Movie & Series Search'
+    }
+  },
   data() {
     return {
       results: [],

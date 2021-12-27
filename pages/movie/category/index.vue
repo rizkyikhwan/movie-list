@@ -22,6 +22,11 @@
 
 <script>
 export default {
+  head() {
+    return {
+      title: 'Browse by Category - Movie Category'
+    }
+  },
   data() {
     return {
       movies: [],
