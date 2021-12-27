@@ -21,13 +21,15 @@
         </button>
       </div>
     </div>
-    <swiper :options="swiperOption" class="swiper">
-      <swiper-slide v-for="trending in trendings" :key="trending.id">
-        <NuxtLink :to="{name: 'tv-series-id', params: { id: trending.id }}" class="link">
-          <Card :show="trending" />
-        </NuxtLink>
-      </swiper-slide>
-    </swiper>
+    <div class="swiper" v-swiper="swiperOption">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" v-for="trending in trendings" :key="trending.id">
+          <NuxtLink :to="{name: 'tv-id', params: { id: trending.id }}" class="link">
+            <Card :show="trending" />
+          </NuxtLink>
+        </div>
+      </div>
+    </div>
   </section>
 </template>
 

@@ -33,16 +33,15 @@
         </button>
       </div>
     </div>
-    <swiper :options="swiperOption" class="swiper">
-      <swiper-slide v-for="tv in tv_series" :key="tv.id">
-        <NuxtLink
-          :to="{ name: 'tv-series-id', params: { id: tv.id } }"
-          class="link"
-        >
-          <Card :show="tv" />
-        </NuxtLink>
-      </swiper-slide>
-    </swiper>
+    <div class="swiper" v-swiper="swiperOption">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" v-for="tv in tv_series" :key="tv.id">
+          <NuxtLink :to="{ name: 'tv-id', params: { id: tv.id } }" class="link">
+            <Card :show="tv" />
+          </NuxtLink>
+        </div>
+      </div>
+    </div>
   </section>
 </template>
 

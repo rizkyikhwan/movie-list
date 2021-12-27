@@ -13,7 +13,7 @@
     </div>
     <div class="grid-tv">
       <div v-for="tv in tv_series" :key="tv.id" class="tv">
-        <NuxtLink :to="{name: 'tv-series-id', params: {id: tv.id}}" class="link">
+        <NuxtLink :to="{name: 'tv-id', params: {id: tv.id}}" class="link">
           <Card :show="tv" />
         </NuxtLink>
       </div>

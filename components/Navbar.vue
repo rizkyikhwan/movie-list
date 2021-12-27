@@ -10,12 +10,21 @@
           <NuxtLink :to="{ name: 'index' }" class="link">Movies</NuxtLink>
         </li>
         <li class="mx-3 nav-item">
-          <NuxtLink :to="{ name: 'tv-series' }" class="link">TV Series</NuxtLink>
+          <NuxtLink :to="{ name: 'tv' }" class="link">TV Series</NuxtLink>
         </li>
         <li class="mx-3 nav-item">
-          <button class="btn-search">
-            <fa icon="search" class="icon" />
-          </button>
+          <div class="d-flex">
+            <input
+              class="form-control mr-2"
+              type="text"
+              placeholder="Search..."
+              v-model="search"
+              @keyup.enter="searchHandler"
+            />
+            <button @click="searchHandler" class="btn-search">
+              <fa icon="search" class="icon" />
+            </button>
+          </div>
         </li>
         <li class="mx-3 nav-item d-none d-lg-block">
           <button @click="toggleDarkMode" class="btn-mode">
@@ -55,6 +64,7 @@ export default {
   data() {
     return {
       isOpen: null,
+      search: ''
     }
   },
   methods: {
@@ -68,6 +78,14 @@ export default {
     toggleNav() {
       this.isOpen = !this.isOpen
     },
+    searchHandler() {
+      if (this.search !== '') {
+        this.$router.replace({
+          name: 'search',
+          query: { q: this.search, page: 1 }
+        })
+      }
+    }
   },
 }
 </script>
@@ -123,7 +141,7 @@ export default {
         display: inline-block;
         border: 0;
         border-radius: $rounded;
-        padding: 3px 6px;
+        padding: 0 10px;
         background: none;
         transition: 0.3s ease-in-out;
 
@@ -181,7 +199,7 @@ export default {
           display: inline-block;
           border: 2px solid $color-secondary;
           border-radius: $rounded;
-          padding: 3px 6px;
+          padding: 0 10px;
           filter: drop-shadow(0 0 2px $color-secondary);
         }
       }

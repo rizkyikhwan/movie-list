@@ -3,7 +3,7 @@
     <h4 class="title mt-2 mb-1 mb-md-2">Discover</h4>
     <div class="grid-latest">
       <div v-for="discover in discovers" :key="discover.id">
-        <NuxtLink :to="{name: 'tv-series-id', params: {id : discover.id}}">
+        <NuxtLink :to="{name: 'tv-id', params: {id : discover.id}}">
           <CardDiscover :discover="discover" />
         </NuxtLink>
       </div>

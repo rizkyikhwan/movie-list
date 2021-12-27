@@ -6,10 +6,12 @@
         <div class="picture">
           <div class="banner">
             <img
+              v-if="tv.last_episode_to_air.still_path"
               :src="`${$config.backdrop}/${tv.last_episode_to_air.still_path}`"
               :alt="tv.last_episode_to_air.name"
               class="img-fluid shadow banner-img"
             />
+            <img v-else src="/profile/episode-not-avail.png" alt="Image not available" class="img-fluid">
             <div class="last-episode">
               <p>{{ getDate(tv.last_episode_to_air.air_date) }}</p>
             </div>

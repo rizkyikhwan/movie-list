@@ -25,12 +25,13 @@
             </button>
           </div>
         </div>
-        <swiper :options="swiperOption" class="swiper">
-          <swiper-slide v-for="actor in actors" :key="actor.id">
-            <CardCast :actor="actor" />
-          </swiper-slide>
-          <div class="swiper-scrollbar" slot="scrollbar"></div>
-        </swiper>
+        <div class="swiper" v-swiper="swiperOption">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide" v-for="actor in actors" :key="actor.id">
+              <CardCast :actor="actor" />
+            </div>
+          </div>
+        </div>
       </div>
       <div class="col-lg-2 grid-info mb-lg-0 mb-3">
         <div>

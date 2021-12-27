@@ -1,14 +1,16 @@
 <template>
   <section class="on-air">
     <h1 class="title">On Airing Today</h1>
-    <swiper :options="swiperOption" class="swiper">
-      <swiper-slide v-for="show in on_air" :key="show.id">
-      <NuxtLink :to="{name: 'tv-series-id', params: { id: show.id }}">
-        <CardNowPlaying :now_playing="show" />
-      </NuxtLink>
-      </swiper-slide>
+    <div class="swiper" v-swiper="swiperOption">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" v-for="show in on_air" :key="show.id">
+          <NuxtLink :to="{name: 'tv-id', params: { id: show.id }}">
+            <CardNowPlaying :now_playing="show" />
+          </NuxtLink>
+        </div>
+      </div>
       <div id="tv-series" class="swiper-pagination" slot="pagination"></div>
-    </swiper>
+    </div>
   </section>
 </template>
 

@@ -9,7 +9,7 @@
           </select>
         </div>
         <div class="col-4">
-          <NuxtLink to="/" class="route">View All</NuxtLink>
+          <NuxtLink :to="{name: 'movie-category', query: { genre: category, page: 1 }}" class="route">View All</NuxtLink>
         </div>
       </div>
       <div class="wrap-navigation d-none d-md-flex">
@@ -21,13 +21,15 @@
         </button>
       </div>
     </div>
-    <swiper :options="swiperOption" class="swiper">
-      <swiper-slide v-for="movie in movies" :key="movie.id">
-        <NuxtLink :to="{name: 'movies-id', params: { id: movie.id }}" class="link">
-          <Card :show="movie" />
-        </NuxtLink>
-      </swiper-slide>
-    </swiper>
+    <div v-swiper="swiperOption" class="swiper" >
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" v-for="movie in movies" :key="movie.id">
+          <NuxtLink :to="{name: 'movie-id', params: { id: movie.id }}" class="link">
+            <Card :show="movie" />
+          </NuxtLink>
+        </div>
+      </div>
+    </div>
   </section>
 </template>
 
@@ -97,6 +99,7 @@ export default {
     box-shadow: none;
   }
 }
+
 .wrap-navigation {
   gap: 1.5rem;
 

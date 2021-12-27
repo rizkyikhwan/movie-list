@@ -1,10 +1,13 @@
 <template>
   <div class="card-movie">
-    <img
-      :src="`${$config.poster}/${show.poster_path}`"
-      :alt="show.title"
-      class="img-fluid shadow poster"
-    />
+    <div class="poster-wrap">
+      <img
+        :src="`${$config.poster}/${show.poster_path}`"
+        :alt="show.title"
+        class="img-fluid shadow poster"
+      />
+      <small v-if="show.media_type" class="type shadow">{{ show.media_type }}</small>
+    </div>
     <div
       class="info d-flex flex-column align-items-start justify-content-center mt-1 p-1"
     >
@@ -50,6 +53,22 @@ export default {
     color: $color-secondary;
     filter: drop-shadow(0 0 1px $color-secondary);
     transition: .2s ease-in-out;
+  }
+
+  .poster-wrap {
+    position: relative;
+
+    .type {
+      position: absolute;
+      top: 0;
+      right: 0;
+      color: $text-white;
+      padding: 3px 6px;
+      border-radius: 0 $rounded 0 $rounded;
+      background: #414850;
+      text-transform: capitalize;
+      filter: drop-shadow(0 0 1px #414850);
+    }
   }
 
   .poster {

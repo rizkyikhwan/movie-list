@@ -1,14 +1,16 @@
 <template>
   <section class="now-playing">
     <h1 class="title">Now Playing in Theaters</h1>
-    <swiper :options="swiperOption" class="swiper">
-      <swiper-slide v-for="now_playing in now_playings" :key="now_playing.id">
-        <NuxtLink :to="{name: 'movies-id', params: { id: now_playing.id }}">
-          <CardNowPlaying :now_playing="now_playing" />
-        </NuxtLink>
-      </swiper-slide>
+    <div class="swiper" v-swiper="swiperOption">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" v-for="now_playing in now_playings" :key="now_playing.id">
+          <NuxtLink :to="{name: 'movie-id', params: { id: now_playing.id }}">
+            <CardNowPlaying :now_playing="now_playing" />
+          </NuxtLink>
+        </div>
+      </div>
       <div id="movie" class="swiper-pagination" slot="pagination"></div>
-    </swiper>
+    </div>
   </section>
 </template>
 
@@ -53,10 +55,6 @@ export default {
   color: $color-primary;
   font-size: 16px;
   text-decoration: underline;
-}
-
-.swiper {
-  border-radius: $rounded;
 }
 
 .swiper-pagination {

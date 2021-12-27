@@ -8,12 +8,12 @@
           <option value="upcoming">Upcoming</option>
           <option value="top_rated">Top Rated</option>
         </select>
-        <NuxtLink to="/" class="route">View All</NuxtLink>
+        <NuxtLink :to="{name: 'movie-all-movies', query: {based: based_on, page: 1}}" class="route">View All</NuxtLink>
       </div>
     </div>
     <div class="grid-movie">
       <div v-for="movie in movies" :key="movie.id" class="movie">
-        <NuxtLink :to="{name: 'movies-id', params: {id: movie.id}}" class="link">
+        <NuxtLink :to="{name: 'movie-id', params: {id: movie.id}}" class="link">
           <Card :show="movie" />
         </NuxtLink>
       </div>
@@ -26,7 +26,7 @@ export default {
   data() {
     return {
       movies: [],
-      based_on: 'popular'
+      based_on: 'popular',
     }
   },
   async fetch() {
@@ -34,10 +34,10 @@ export default {
   },
   methods: {
     async getMovies() {
-      const response = await this.$axios.$get(`/movie/${this.based_on}?api_key=${process.env.apiKey}&language=en-US&page=1`)
+      const response = await this.$axios.$get(`/movie/${this.based_on}?api_key=${process.env.apiKey}&language=en-US&page=${this.pages}`)
       this.movies = response.results
     }
-  }
+  },
 }
 </script>
 

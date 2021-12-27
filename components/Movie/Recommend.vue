@@ -11,13 +11,15 @@
         </button>
       </div>
     </div>
-    <swiper v-if="recommended.length" :options="swiperOption" class="swiper">
-      <swiper-slide v-for="(recommend, index) in recommended" :key="index">
-        <NuxtLink :to="{name: 'movies-id', params: {id: recommend.id}}" class="link">
-          <Card :show="recommend" />
-        </NuxtLink>
-      </swiper-slide>
-    </swiper>
+    <div v-swiper="swiperOption" v-if="recommended.length" class="swiper" >
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" v-for="(recommend, index) in recommended" :key="index">
+           <NuxtLink :to="{name: 'movie-id', params: {id: recommend.id}}" class="link">
+            <Card :show="recommend" />
+          </NuxtLink>
+        </div>
+      </div>
+    </div>
     <p v-else>No recommendation yet :(</p>
   </div>
 </template>

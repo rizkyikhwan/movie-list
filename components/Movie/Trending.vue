@@ -21,13 +21,15 @@
         </button>
       </div>
     </div>
-    <swiper :options="swiperOption" class="swiper">
-        <swiper-slide v-for="trending in trendings" :key="trending.id">
-          <NuxtLink :to="{name: 'movies-id', params: { id: trending.id }}" class="link">
+    <div v-swiper="swiperOption" class="swiper" >
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" v-for="trending in trendings" :key="trending.id">
+          <NuxtLink :to="{name: 'movie-id', params: { id: trending.id }}" class="link">
             <Card :show="trending" />
           </NuxtLink>
-        </swiper-slide>
-    </swiper>
+        </div>
+      </div>
+    </div>
   </section>
 </template>
 
@@ -69,7 +71,7 @@ export default {
       const response = await this.$axios.$get(
         `/trending/movie/${this.query}?api_key=${process.env.apiKey}`
       )
-      this.trendings = response.results
+      this.trendings = response.results.filter(trending => trending.media_type)
     },
   },
 }
