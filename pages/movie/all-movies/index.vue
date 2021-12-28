@@ -31,18 +31,16 @@ export default {
   },
   data() {
     return {
-      movies: [],
-      page: {},
       based_on: this.$route.query.based,
     }
   },
   watchQuery: true,
   async asyncData({ $axios, route }) {
     let { based, page } = route.query
-    const movies = await $axios.$get(`/movie/${based}?api_key=${process.env.apiKey}&language=en-US&page=${page}`)
+    const response = await $axios.$get(`/movie/${based}?api_key=${process.env.apiKey}&language=en-US&page=${page}`)
     return { 
-      movies: movies.results.filter(movie => movie.poster_path !== null),
-      page: movies
+      movies: response.results.filter(movie => movie.poster_path !== null),
+      page: response
     }
   },
   methods: {

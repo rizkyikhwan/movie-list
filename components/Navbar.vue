@@ -6,13 +6,13 @@
       </NuxtLink>
 
       <ul class="mb-0 nav-list" :class="isOpen ? 'active' : ''">
-        <li class="mx-3 nav-item">
+        <li @click="toggleNav" class="mx-3 nav-item order-lg-0 order-2">
           <NuxtLink :to="{ name: 'index' }" class="link">Movies</NuxtLink>
         </li>
-        <li class="mx-3 nav-item">
+        <li @click="toggleNav" class="mx-3 nav-item order-lg-0 order-3">
           <NuxtLink :to="{ name: 'tv' }" class="link">TV Series</NuxtLink>
         </li>
-        <li class="mx-3 nav-item">
+        <li class="mx-3 nav-item order-lg-0 order-1">
           <div class="d-flex">
             <input
               class="form-control mr-2"
@@ -64,7 +64,8 @@ export default {
   data() {
     return {
       isOpen: null,
-      search: ''
+      search: '',
+      windowWidth: null
     }
   },
   methods: {
@@ -76,7 +77,10 @@ export default {
       }
     },
     toggleNav() {
-      this.isOpen = !this.isOpen
+      this.windowWidth = window.innerWidth
+      if (this.windowWidth < 992) {
+        this.isOpen = !this.isOpen
+      }
     },
     searchHandler() {
       if (this.search !== '') {
@@ -84,6 +88,7 @@ export default {
           name: 'search',
           query: { q: this.search, page: 1 }
         })
+        this.toggleNav()
       }
     }
   },

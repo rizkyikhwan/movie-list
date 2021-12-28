@@ -29,40 +29,39 @@ export default {
   },
   data() {
     return {
-      movie: {},
-      crews: [],
-      actors: [],
-      trailer: {},
-      recommended: [],
       isOpen: null,
     }
   },
-  async asyncData({ $axios, route }) {
-    const { id } = route.params
-    const movie = await $axios.$get(
-      `/movie/${id}?api_key=${process.env.apiKey}&language=en-US`, { progress: false }
-    )
-    const crews = await $axios.$get(
-      `/movie/${id}/credits?api_key=${process.env.apiKey}&language=en-US`, { progress: false }
-    )
-    const trailer = await $axios.$get(
-      `/movie/${id}/videos?api_key=${process.env.apiKey}`, { progress: false }
-    )
-    const recommend = await $axios.$get(
-      `/movie/${id}/recommendations?api_key=${process.env.apiKey}&language=en-US&page=1`, { progress: false }
-    )
-    return {
-      movie: movie,
-      crews: crews.crew.filter(
-        (crew) =>
-          crew.job == 'Director' ||
-          crew.job == 'Story' ||
-          crew.job == 'Creator' ||
-          crew.job == 'Writer'
-      ),
-      actors: crews.cast,
-      trailer: trailer.results.find((trailer) => trailer.type === 'Trailer') || '',
-      recommended: recommend.results,
+  async asyncData({ $axios, route, redirect }) {
+    try {
+      const { id } = route.params
+      const movie = await $axios.$get(
+        `/movie/${id}?api_key=${process.env.apiKey}&language=en-US`, { progress: false }
+      )
+      const crews = await $axios.$get(
+        `/movie/${id}/credits?api_key=${process.env.apiKey}&language=en-US`, { progress: false }
+      )
+      const trailer = await $axios.$get(
+        `/movie/${id}/videos?api_key=${process.env.apiKey}`, { progress: false }
+      )
+      const recommend = await $axios.$get(
+        `/movie/${id}/recommendations?api_key=${process.env.apiKey}&language=en-US&page=1`, { progress: false }
+      )
+      return {
+        movie: movie,
+        crews: crews.crew.filter(
+          (crew) =>
+            crew.job == 'Director' ||
+            crew.job == 'Story' ||
+            crew.job == 'Creator' ||
+            crew.job == 'Writer'
+        ),
+        actors: crews.cast,
+        trailer: trailer.results.find((trailer) => trailer.type === 'Trailer') || '',
+        recommended: recommend.results.filter(recom => recom.poster_path !== null),
+      }
+    } catch (error) {
+      redirect('/error')
     }
   },
   methods: {

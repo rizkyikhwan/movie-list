@@ -29,52 +29,48 @@ export default {
   },
   data() {
     return {
-      tv: {},
-      trailer: {},
-      crews: [],
-      actors: [],
-      recommend: [],
       isOpen: null,
     }
   },
-  async asyncData({ $axios, route }) {
-    const { id } = route.params
-    const tv = await $axios.$get(
-      `/tv/${id}?api_key=${process.env.apiKey}&language=en-US`, { progress: false }
-    )
-    const crews = await $axios.$get(
-      `/tv/${id}/credits?api_key=${process.env.apiKey}&language=en-US`, { progress: false }
-    )
-    const recommend = await $axios.$get(
-      `/tv/${id}/recommendations?api_key=${process.env.apiKey}&language=en-US&page=1`, { progress: false }
-    )
-    const trailer = await $axios.$get(
-      `/tv/${id}/videos?api_key=${process.env.apiKey}`, { progress: false }
-    )
-    return {
-      tv: tv,
-      crews: crews.crew.filter(
-          (crew) =>
-            crew.job == 'Executive Producer' ||
-            crew.job == 'Creator' ||
-            crew.job == 'Producer' ||
-            crew.job == 'Director'
-        )
-        .slice(0, 4),
-      actors: crews.cast,
-      recommend: recommend.results,
-      trailer:
-        trailer.results.find((trailer) => trailer.type === 'Trailer') || '',
+  async asyncData({ $axios, route, redirect }) {
+    try {
+      const { id } = route.params
+      const tv = await $axios.$get(
+        `/tv/${id}?api_key=${process.env.apiKey}&language=en-US`, { progress: false }
+      )
+      const crews = await $axios.$get(
+        `/tv/${id}/credits?api_key=${process.env.apiKey}&language=en-US`, { progress: false }
+      )
+      const recommend = await $axios.$get(
+        `/tv/${id}/recommendations?api_key=${process.env.apiKey}&language=en-US&page=1`, { progress: false }
+      )
+      const trailer = await $axios.$get(
+        `/tv/${id}/videos?api_key=${process.env.apiKey}`, { progress: false }
+      )
+      return {
+        tv: tv,
+        crews: crews.crew.filter(
+            (crew) =>
+              crew.job == 'Executive Producer' ||
+              crew.job == 'Creator' ||
+              crew.job == 'Producer' ||
+              crew.job == 'Director'
+          )
+          .slice(0, 4),
+        actors: crews.cast,
+        recommend: recommend.results.filter(recom => recom.poster_path !== null),
+        trailer:
+          trailer.results.find((trailer) => trailer.type === 'Trailer') || '',
+      }
+    } catch (error) {
+      redirect('/error')
     }
   },
   methods: {
     toggleTrailer() {
       this.isOpen = !this.isOpen
       const trailer = document.querySelector('.trailer')
-      trailer.contentWindow.postMessage(
-        '{"event":"command", "func":"stopVideo", "args":""}',
-        '*'
-      )
+      trailer.contentWindow.postMessage('{"event":"command", "func":"stopVideo", "args":""}','*')
     },
   },
 }

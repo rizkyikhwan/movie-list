@@ -5,13 +5,14 @@
         <h2>Search result for</h2>
         <h3>"{{ $route.query.q }}"</h3>
       </div>
-      <div class="grid-movie">
+      <div v-if="results != ''" class="grid-movie">
         <div v-for="result in results" :key="result.id" class="movie">
           <NuxtLink :to="{name: `${result.media_type}-id`, params: {id: result.id}}" class="link">
             <Card :show="result" />
           </NuxtLink>
         </div>
       </div>
+      <SearchNotFound v-else />
     </div>
     <Pagination :page="page" />
   </main>
@@ -25,14 +26,8 @@ export default {
       titleTemplate: '%s - Movie & Series Search'
     }
   },
-  data() {
-    return {
-      results: [],
-      page: {}
-    }
-  },
   watchQuery: true,
-  async asyncData({ $axios, route }) {
+  async asyncData({ $axios, route, redirect }) {
     try {
       let { q, page } = route.query
       const response = await $axios.$get(`/search/multi?api_key=${process.env.apiKey}&language=en-US&query=${q}&page=${page}&include_adult=false`)
@@ -41,7 +36,7 @@ export default {
         page: response
       }
     } catch (err) {
-      console.log(err);
+      redirect('/error')
     }
   }
 }

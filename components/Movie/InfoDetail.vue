@@ -4,16 +4,17 @@
       <div class="grid-detail mb-3">
         <div class="overview">
           <h5 class="title font-weight-bold">Overview</h5>
-          <p class="text-justify">{{ movie.overview }}</p>
+          <p v-if="movie.overview" class="text-justify">{{ movie.overview }}</p>
+          <p v-else>-</p>
         </div>
         <div class="row">
-          <div v-for="crew in crews" :key="crew.id" class="col-6 col-md-3">
+          <div v-for="(crew, index) in crews" :key="index" class="col-6 col-md-3">
             <h5 class="title font-weight-bold">{{ crew.job }}</h5>
             <p>{{ crew.name }}</p>
           </div>
         </div>
       </div>
-      <div class="d-flex justify-content-between align-items-center mb-2">
+      <div v-if="actors != ''" class="d-flex justify-content-between align-items-center mb-2">
         <h5 class="title font-weight-bold">Cast</h5>
         <div class="wrap-navigation d-none d-md-flex">
           <button id="prev-cast" class="btn-nav d-flex align-items-center bg-transparent">
@@ -26,7 +27,7 @@
       </div>
       <div v-swiper="swiperOption" class="swiper" >
         <div class="swiper-wrapper">
-          <div class="swiper-slide" v-for="actor in actors" :key="actor.id">
+          <div class="swiper-slide" v-for="(actor, index) in actors" :key="index">
             <CardCast :actor="actor" />
           </div>
         </div>

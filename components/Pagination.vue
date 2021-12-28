@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!page.total_pages <= 500" class="d-flex justify-content-center align-items-center my-5">
+  <div v-if="!page.total_pages <= 500 && page.total_pages != ''" class="d-flex justify-content-center align-items-center my-5">
     <div class="page-guides" v-if="page.total_pages != 1">
       <div>
         <NuxtLink

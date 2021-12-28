@@ -15,7 +15,7 @@
           </select>
         </div>
         <div class="col-4">
-          <NuxtLink to="/" class="route">View All</NuxtLink>
+          <NuxtLink :to="{name: 'tv-category', query: { genre: category, page: 1 }}" class="route">View All</NuxtLink>
         </div>
       </div>
       <div class="wrap-navigation d-none d-md-flex">
@@ -91,8 +91,7 @@ export default {
           genre.name !== 'Reality' &&
           genre.name !== 'Soap' &&
           genre.name !== 'Talk' &&
-          genre.name !== 'News' &&
-          genre.name !== 'Western'
+          genre.name !== 'News'
       )
     },
     async getTvSeries() {

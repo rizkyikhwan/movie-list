@@ -1,18 +1,21 @@
 <template>
   <main class="browse-by-category container">
     <div class="mb-4">
-      <h1 class="title">Browse Movie By Category</h1>
+      <h1 class="title">Browse Series By Category</h1>
       <select v-model="category" @change="genre" class="form-control">
-        <option v-for="category in categorys" :key="category.id" :value="category.id">{{ category.name }}</option>
+        <option
+          v-for="category in categorys"
+          :key="category.id"
+          :value="category.id"
+        >
+          {{ category.name }}
+        </option>
       </select>
     </div>
-    <div class="grid-movie">
-      <div v-for="movie in movies" :key="movie.id" class="movie">
-        <NuxtLink
-          :to="{ name: 'movie-id', params: { id: movie.id } }"
-          class="link"
-        >
-          <Card :show="movie" />
+    <div class="grid-series">
+      <div v-for="tv in tv_series" :key="tv.id" class="tv">
+        <NuxtLink :to="{ name: 'tv-id', params: { id: tv.id } }" class="link">
+          <Card :show="tv" />
         </NuxtLink>
       </div>
     </div>
@@ -24,33 +27,47 @@
 export default {
   head() {
     return {
-      title: 'Browse by Category - Movie Category'
+      title: 'Browse by Category - TV Series Category',
     }
   },
   data() {
     return {
+      tv_series: [],
+      page: {},
+      categorys: [],
       category: this.$route.query.genre,
     }
   },
   watchQuery: true,
-  async asyncData({ $axios, route}) {
+  async asyncData({ $axios, route }) {
     let { genre, page } = route.query
-    const category = await $axios.$get(`/genre/movie/list?api_key=${process.env.apiKey}&language=en-US`, { progress: false })
-    const movies = await $axios.$get(`/discover/movie?api_key=${process.env.apiKey}&language=en-US&with_genres=${genre}&page=${page}`)
-    return { 
-      categorys: category.genres.filter(genre => genre.name !== 'Documentary'),
-      movies: movies.results.filter(movie => movie.poster_path !== null),
-      page: movies
+    const category = await $axios.$get(
+      `/genre/tv/list?api_key=${process.env.apiKey}&language=en-US`,
+      { progress: false }
+    )
+    const series = await $axios.$get(
+      `/discover/tv?api_key=${process.env.apiKey}&language=en-US&with_genres=${genre}&page=${page}`
+    )
+    return {
+      categorys: category.genres.filter(
+        (genre) =>
+          genre.name !== 'Reality' &&
+          genre.name !== 'Soap' &&
+          genre.name !== 'Talk' &&
+          genre.name !== 'News'
+      ),
+      tv_series: series.results.filter((series) => series.poster_path !== null),
+      page: series,
     }
   },
   methods: {
     genre() {
       this.$router.push({
         path: this.$route.path,
-        query: { genre: this.category, page: 1 }
+        query: { genre: this.category, page: 1 },
       })
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -76,7 +93,7 @@ export default {
   }
 }
 
-.grid-movie {
+.grid-series {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
   justify-content: center;
@@ -102,7 +119,7 @@ export default {
 }
 
 @media (max-width: $xs) {
-  .grid-movie {
+  .grid-series {
     grid-template-columns: repeat(2, 1fr);
   }
 }

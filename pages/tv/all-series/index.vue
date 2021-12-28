@@ -1,15 +1,12 @@
 <template>
-  <section class="all-tv-series mb-5">
+  <main class="all-tv-series container">
     <div class="mb-4">
       <h1 class="title">All TV Series</h1>
-      <div class="d-flex justify-content-between align-items-end">
-        <select v-model="based_on" @change="$fetch" class="form-control">
-          <option value="popular">Popular</option>
-          <option value="on_the_air">On the Air</option>
-          <option value="top_rated">Top Rated</option>
-        </select>
-        <NuxtLink :to="{name: 'tv-all-series', query: { based: based_on, page: 1 }}" class="route">View All</NuxtLink>
-      </div>
+      <select v-model="based_on" @change="based" class="form-control">
+        <option value="popular">Popular</option>
+        <option value="on_the_air">On the Air</option>
+        <option value="top_rated">Top Rated</option>
+      </select>
     </div>
     <div class="grid-tv">
       <div v-for="tv in tv_series" :key="tv.id" class="tv">
@@ -18,30 +15,47 @@
         </NuxtLink>
       </div>
     </div>
-  </section>
+    <Pagination :page="page" />
+  </main>
 </template>
 
 <script>
 export default {
-  data() {
+  head() {
     return {
-      tv_series: [],
-      based_on: 'popular'
+      title: 'All TV Series - See all available series'
     }
   },
-  async fetch() {
-    await this.getTvSeries()
+  data() {
+    return {
+      based_on: this.$route.query.based
+    }
+  },
+  watchQuery: true,
+  async asyncData({ $axios, route }) {
+    let { based, page } = route.query
+    const response = await $axios.$get(`/tv/${based}?api_key=${process.env.apiKey}&language=en-US&page=${page}`)
+    return {
+      tv_series: response.results.filter(series => series.poster_path !== null),
+      page: response
+    }
   },
   methods: {
-    async getTvSeries() {
-      const response = await this.$axios.$get(`/tv/${this.based_on}?api_key=${process.env.apiKey}&language=en-US&page=1`)
-      this.tv_series = response.results
+    based() {
+      this.$router.push({
+        path: this.$route.path,
+        query: { based: this.based_on, page: 1}
+      })
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.all-tv-series {
+  padding-top: 95px;
+}
+
 .title {
   font-size: 1.75rem;
 }
@@ -69,6 +83,12 @@ export default {
 .link {
   color: $color-primary;
   text-decoration: none;
+}
+
+@media (max-width: $md) {
+  .all-tv-series {
+    padding-top: 10px;
+  }
 }
 
 @media (max-width: $sm) {
