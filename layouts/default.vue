@@ -4,7 +4,14 @@
     <Nuxt
       keep-alive
       :keep-alive-props="{
-        include: ['pages/index.vue', 'pages/tv/index.vue', 'pages/movie/_id.vue', 'pages/tv/_id.vue']
+        exclude: [
+          'components/Pagination.vue',
+          'pages/search.vue',
+          'pages/movie/category/index.vue',
+          'pages/movie/all-movies/index.vue',
+          'pages/tv/category/index.vue',
+          'pages/tv/all-series/index.vue'
+        ],
       }"
     />
     <Footer />
