@@ -30,6 +30,14 @@ body {
   }
 }
 
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  background: #2bbb99;
+  width: 25px;
+  border-radius: 5px;
+  transition: 0.2s;
+}
+
 .pages-enter-active,
 .pages-leave-active {
   transition: 0.2s ease-in-out;
