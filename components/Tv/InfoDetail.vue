@@ -5,7 +5,7 @@
         <div class="grid-detail mb-3">
           <div class="overview">
             <h5 class="title font-weight-bold">Overview</h5>
-            <p v-if="tv.overview != null && ''" class="text-justify">{{ tv.overview }}</p>
+            <p v-if="tv.overview != null" class="text-justify">{{ tv.overview }}</p>
             <p v-else>-</p>
           </div>
           <div class="row">
