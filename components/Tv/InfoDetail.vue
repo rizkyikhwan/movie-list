@@ -5,7 +5,7 @@
         <div class="grid-detail mb-3">
           <div class="overview">
             <h5 class="title font-weight-bold">Overview</h5>
-            <p v-if="tv.overview != null" class="text-justify">{{ tv.overview }}</p>
+            <p v-if="tv.overview != null && ''" class="text-justify">{{ tv.overview }}</p>
             <p v-else>-</p>
           </div>
           <div class="row">
@@ -43,7 +43,7 @@
           <h5 class="title font-weight-bold">Release Date</h5>
           <p>{{ getRelease(tv.first_air_date) }}</p>
         </div>
-        <div v-if="!tv.last_episode_to_air.overview">
+        <div v-if="tv.last_episode_to_air != null">
           <h5 class="title font-weight-bold">Last Air Date</h5>
           <p>{{ getRelease(tv.last_air_date) }}</p>
         </div>

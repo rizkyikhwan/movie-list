@@ -5,7 +5,7 @@
       <div v-for="review in reviews" :key="review.id" class="review">
         <div class="wrapper">
           <img
-            :src="`https://secure.gravatar.com/avatar/${review.author_details.avatar_path}`"
+            :src="`https://secure.gravatar.com/avatar`"
             alt="Profile Review"
             class="img-fluid shadow picture"
           />

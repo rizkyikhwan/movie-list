@@ -38,7 +38,7 @@ export default {
   methods: {
     async getOnAir() {
       const response = await this.$axios.$get(`tv/airing_today?api_key=${process.env.apiKey}&language=en-US&page=1`)
-      this.on_air = response.results.slice(0, 10)
+      this.on_air = response.results.filter(now_play => now_play.backdrop_path != null).slice(0, 10)
     }
   }
 }

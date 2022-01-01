@@ -31,7 +31,7 @@ export default {
   },
   data() {
     return {
-      based_on: this.$route.query.based,
+      based_on: this.$route.query.based
     }
   },
   watchQuery: true,

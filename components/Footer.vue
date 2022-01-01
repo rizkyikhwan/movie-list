@@ -2,7 +2,7 @@
   <div class="footer pt-4 pb-3">
     <img src="/logo/logo-movie.png" alt="logo" class="logo" />
     <p class="pt-3">
-      © 2021 <a href="https://github.com/rizkyikhwan">Rizky Ikhwan</a>
+      © 2021 <a href="https://rizkyikhwan.my.id/" target="__blank">Rizky Ikhwan</a>
     </p>
     <div class="grid-contact">
       <a

@@ -26,6 +26,7 @@ export default {
 .home {
   padding-top: 95px;
 }
+
 @media (max-width: $lg) {
   .home {
     padding-top: 10px;

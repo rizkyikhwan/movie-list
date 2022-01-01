@@ -1,5 +1,5 @@
 <template>
-  <section v-if="tv.last_episode_to_air.overview" class="py-3">
+  <section v-if="tv.last_episode_to_air != null" class="py-3">
     <h5 class="font-weight-bold title">Last Episode</h5>
     <div class="last-card shadow">
       <div class="grid-last-episode">
