@@ -7,10 +7,10 @@
         exclude: [
           'Pagination',
           'pages/search.vue',
-          'pages/movie/category/index.vue',
-          'pages/movie/all-movies/index.vue',
-          'pages/tv/category/index.vue',
-          'pages/tv/all-series/index.vue'
+          'pages/movie/category.vue',
+          'pages/movie/all-movies.vue',
+          'pages/tv/category.vue',
+          'pages/tv/all-series.vue'
         ]
       }"
     />
