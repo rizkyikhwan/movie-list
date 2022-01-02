@@ -2,15 +2,11 @@
   <section class="browse-by-category mb-5">
     <h1 class="title">Browse By Category</h1>
     <div class="d-flex justify-content-between align-items-end mb-4">
-      <div class="row d-flex align-items-center">
-        <div class="col-8">
-          <select v-model="category" @change="$fetch" class="form-control">
-            <option v-for="category in categorys" :key="category.id" :value="category.id">{{ category.name }}</option>
-          </select>
-        </div>
-        <div class="col-4">
-          <NuxtLink :to="{name: 'movie-category', query: { genre: category, page: 1 }}" class="route">View All</NuxtLink>
-        </div>
+      <div class="grid">
+        <select v-model="category" @change="$fetch" class="form-control">
+          <option v-for="category in categorys" :key="category.id" :value="category.id">{{ category.name }}</option>
+        </select>
+        <NuxtLink :to="{name: 'movie-category', query: { genre: category, page: 1 }}" class="route">View All</NuxtLink>
       </div>
       <div class="wrap-navigation d-none d-md-flex">
         <button id="prev-by-category" class="btn-nav d-flex align-items-center bg-transparent">
@@ -98,6 +94,14 @@ export default {
   &:focus {
     box-shadow: none;
   }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: start;
+  align-items: center;
+  gap: 25px;
 }
 
 .wrap-navigation {

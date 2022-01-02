@@ -109,5 +109,10 @@ export default {
   .card-movie .title {
     font-size: .9rem;
   }
+
+  .card-movie:hover .title {
+    color: $color-primary;
+    filter: none;
+  }
 }
 </style>

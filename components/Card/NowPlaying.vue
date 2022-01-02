@@ -97,4 +97,11 @@ export default {
 .star {
   color: #fcda5f;
 }
+
+@media (max-width: $lg) {
+  .card-now-playing:hover .title {
+    color: $color-primary;
+    filter: none;
+  }
+}
 </style>

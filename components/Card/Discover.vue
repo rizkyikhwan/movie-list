@@ -1,5 +1,5 @@
 <template>
-  <div class="card-top-rated">
+  <div class="card-discover">
     <img :src="`${$config.banner}/${discover.backdrop_path}`" :alt="discover.title" class="img-fluid shadow poster">
       <div class="info">
         <h6 v-if="discover.title" class="title mb-n1">
@@ -35,7 +35,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.card-top-rated {
+.card-discover {
   position: relative;
   color: $text-white;
   
@@ -68,7 +68,7 @@ export default {
     .title {
       font-weight: 600;
       letter-spacing: 1.25px;
-      font-size: 1.5vh;
+      font-size: .75rem;
     }
   }
 
@@ -84,6 +84,13 @@ export default {
 
   .star {
     color: #fcda5f;
+  }
+}
+
+@media (max-width: $lg) {
+  .card-discover:hover .title {
+    color: $color-primary;
+    filter: none;
   }
 }
 </style>
